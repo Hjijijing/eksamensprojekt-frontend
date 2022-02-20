@@ -2,9 +2,9 @@ import React from "react";
 
 export default function ItemListItem({ item }) {
   return (
-    <div>
-      {item.itemName} {item.description} {"" + item.storedIn}{" "}
-      {"" + item.isContainer}
-    </div>
+    <tr className="itemlist-item">
+      <td>{item.itemName}</td>
+      <td>{"" + item.storedIn}</td>
+    </tr>
   );
 }
