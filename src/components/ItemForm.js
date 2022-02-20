@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import useItems from "../hooks/useItems";
 
-export default function ItemForm({ submitHandler, enabled, item, items }) {
+export default function ItemForm({ submitHandler, enabled, item }) {
   const [itemName, setItemName] = useState(item.itemName ?? "");
   const [description, setDescription] = useState(item.description ?? "");
   const [isContainer, setIsContainer] = useState(item.isContainer ?? false);
-  const [storedIn, setStoredIn] = useState("None");
+  const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
+  const items = useItems();
 
   useEffect(() => {
     setItemName(item.itemName ?? "");
     setDescription(item.description ?? "");
-    setIsContainer(item.isContainer ?? "false");
+    setIsContainer(item.isContainer ?? false);
+    setStoredIn(item.storedIn ?? "None");
   }, [item]);
 
   return (
@@ -52,7 +55,7 @@ export default function ItemForm({ submitHandler, enabled, item, items }) {
         }}
       >
         <option value="None">None</option>
-        {items.map((item) => {
+        {items.items.map((item) => {
           if (item.isContainer)
             return (
               <option value={item._id} key={item._id}>

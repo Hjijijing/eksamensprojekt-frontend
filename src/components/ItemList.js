@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ItemListItem from "./ItemListItem";
+import useItems from "../hooks/useItems";
 import "../styles/itemlist.css";
 
-export default function ItemList({ items }) {
+export default function ItemList() {
   const [searchTerm, setSearchTerm] = useState("");
+  const items = useItems();
 
   return (
     <div className="itemlist-container">
@@ -16,14 +18,18 @@ export default function ItemList({ items }) {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <table className="itemlist-list">
-        <tr>
-          <th>Item Name</th>
-          <th>Stored In</th>
-        </tr>
-        {items.map((item) => {
-          if (item.itemName.includes(searchTerm))
-            return <ItemListItem key={item._id} item={item} />;
-        })}
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Stored In</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.items.map((item) => {
+            if (item.itemName.includes(searchTerm))
+              return <ItemListItem key={item._id} item={item} />;
+          })}
+        </tbody>
       </table>
     </div>
   );
