@@ -17,6 +17,7 @@ export default function ItemForm({ submitHandler, enabled, item }) {
 
   return (
     <form
+      class="item-form"
       onSubmit={(e) => {
         e.preventDefault();
         if (enabled)
@@ -33,23 +34,27 @@ export default function ItemForm({ submitHandler, enabled, item }) {
         type="text"
         name="itemname"
         placeholder="Item Name"
+        id="item-form-itemname"
         onChange={(e) => setItemName(e.target.value)}
       />
-      <input
+      <textarea
         value={description}
         type="text"
         name="description"
         placeholder="Description"
+        id="item-form-description"
         onChange={(e) => setDescription(e.target.value)}
       />
       <input
         value={isContainer ? "on" : "off"}
         type="checkbox"
         name="iscontainer"
+        id="item-form-iscontainer"
         onChange={(e) => setIsContainer(e.target.checked)}
       />
       <select
         value={storedIn}
+        id="item-form-storedin"
         onChange={(e) => {
           setStoredIn(e.target.value);
         }}
@@ -64,7 +69,7 @@ export default function ItemForm({ submitHandler, enabled, item }) {
             );
         })}
       </select>
-      <input type="submit" name="submit" value="Submit" />
+      <input type="submit" name="submit" value="Submit" id="item-form-submit" />
     </form>
   );
 }
