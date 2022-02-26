@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
+import ItemSelect from "./ItemSelect";
+import PillSelector from "./PillSelector";
 
 export default function ItemForm({ submitHandler, enabled, item }) {
   const [itemName, setItemName] = useState(item.itemName ?? "");
   const [description, setDescription] = useState(item.description ?? "");
   const [isContainer, setIsContainer] = useState(item.isContainer ?? false);
   const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
-  const items = useItems();
 
   useEffect(() => {
     setItemName(item.itemName ?? "");
@@ -17,7 +18,8 @@ export default function ItemForm({ submitHandler, enabled, item }) {
 
   return (
     <form
-      class="item-form"
+      className="item-form card"
+      id="item-form"
       onSubmit={(e) => {
         e.preventDefault();
         if (enabled)
@@ -43,32 +45,31 @@ export default function ItemForm({ submitHandler, enabled, item }) {
         name="description"
         placeholder="Description"
         id="item-form-description"
+        form="item-form"
         onChange={(e) => setDescription(e.target.value)}
       />
-      <input
+      {/* <input
         value={isContainer ? "on" : "off"}
         type="checkbox"
         name="iscontainer"
         id="item-form-iscontainer"
         onChange={(e) => setIsContainer(e.target.checked)}
+      /> */}
+      <PillSelector
+        options={[
+          { value: false, label: "Item" },
+          { value: true, label: "Container" },
+        ]}
+        value={isContainer}
+        onChange={setIsContainer}
       />
-      <select
+      <ItemSelect
+        filter={(item) => item.isContainer}
         value={storedIn}
-        id="item-form-storedin"
-        onChange={(e) => {
-          setStoredIn(e.target.value);
+        itemChanged={(e) => {
+          setStoredIn(e.value);
         }}
-      >
-        <option value="None">None</option>
-        {items.items.map((item) => {
-          if (item.isContainer)
-            return (
-              <option value={item._id} key={item._id}>
-                {item.itemName}
-              </option>
-            );
-        })}
-      </select>
+      />
       <input type="submit" name="submit" value="Submit" id="item-form-submit" />
     </form>
   );

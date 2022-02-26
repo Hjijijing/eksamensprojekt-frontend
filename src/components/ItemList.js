@@ -17,7 +17,7 @@ export default function ItemList() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <table className="itemlist-list">
+      <table className="itemlist-list card">
         <thead>
           <tr>
             <th>Item Name</th>
@@ -26,7 +26,7 @@ export default function ItemList() {
         </thead>
         <tbody>
           {items.items.map((item) => {
-            if (item.itemName.includes(searchTerm))
+            if (item.itemName.toLowerCase().includes(searchTerm.toLowerCase()))
               return <ItemListItem key={item._id} item={item} />;
           })}
         </tbody>
