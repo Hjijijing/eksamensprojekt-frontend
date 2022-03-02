@@ -53,7 +53,7 @@ body {
   height: 50px;
   border-radius: 10px;
   padding: 10px;
-  border: 2px solid aqua;
+  border: 2px solid black;
 }
 
 .itemlist-list {
@@ -96,13 +96,33 @@ textarea {
   font-size: 1.5rem;
 }
 
-.item-form #item-form-submit {
+#item-form-buttonrow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+
+#item-form-buttonrow button {
+  flex: 1 1 0;
+}
+
+#item-form-buttonrow button {
   border-radius: 10px;
+  padding: 10px;
   border: none;
   text-transform: uppercase;
-  background-color: blue;
+
   color: white;
   font-size: 1.5rem;
+}
+
+#item-form-submit {
+  background-color: blue;
+}
+
+#item-form-cancel {
+  background-color: red;
 }
 
 .pill-selector {

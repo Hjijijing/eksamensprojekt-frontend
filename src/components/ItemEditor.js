@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import ItemForm from "./ItemForm";
 import axios from "axios";
 import useItems from "../hooks/useItems";
+import { useParams, useNavigate } from "react-router-dom";
 
-export default function ItemEditor({ item }) {
+export default function ItemEditor() {
   const [enabled, setEnabled] = useState(true);
   const items = useItems();
-  item = items.items[0];
+
+  const { id } = useParams();
+  const item = items.getItemById(id);
+  const navigate = useNavigate();
 
   function submitHandler(data) {
     setEnabled(false);
@@ -17,9 +21,20 @@ export default function ItemEditor({ item }) {
     });
   }
 
+  function cancelHandler(e) {
+    setEnabled(false);
+    axios.delete(`http://localhost:5000/items/${item._id}`).then(() => {
+      items.refreshItems();
+      navigate("/");
+      alert("item deleted");
+    });
+  }
+
   return (
     <ItemForm
       submitHandler={submitHandler}
+      cancelHandler={cancelHandler}
+      labels={{ submit: "Update", cancel: "Delete" }}
       item={item ?? {}}
       enabled={enabled}
     />

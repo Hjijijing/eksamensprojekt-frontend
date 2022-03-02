@@ -3,11 +3,28 @@ import useItems from "../hooks/useItems";
 import ItemSelect from "./ItemSelect";
 import PillSelector from "./PillSelector";
 
-export default function ItemForm({ submitHandler, enabled, item }) {
+export default function ItemForm({
+  submitHandler,
+  cancelHandler,
+  enabled,
+  item,
+  labels,
+}) {
   const [itemName, setItemName] = useState(item.itemName ?? "");
   const [description, setDescription] = useState(item.description ?? "");
   const [isContainer, setIsContainer] = useState(item.isContainer ?? false);
   const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
+
+  function onSubmit(e) {
+    e.preventDefault();
+    if (enabled)
+      submitHandler({
+        itemName,
+        description,
+        isContainer,
+        storedIn: storedIn === "None" ? null : storedIn,
+      });
+  }
 
   useEffect(() => {
     setItemName(item.itemName ?? "");
@@ -17,20 +34,7 @@ export default function ItemForm({ submitHandler, enabled, item }) {
   }, [item]);
 
   return (
-    <form
-      className="item-form card"
-      id="item-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (enabled)
-          submitHandler({
-            itemName,
-            description,
-            isContainer,
-            storedIn: storedIn === "None" ? null : storedIn,
-          });
-      }}
-    >
+    <form className="item-form card" id="item-form" onSubmit={onSubmit}>
       <input
         value={itemName}
         type="text"
@@ -70,7 +74,26 @@ export default function ItemForm({ submitHandler, enabled, item }) {
           setStoredIn(e.value);
         }}
       />
-      <input type="submit" name="submit" value="Submit" id="item-form-submit" />
+      <div id="item-form-buttonrow">
+        <button
+          type="submit"
+          form="item-form"
+          name="submit"
+          value="Submit"
+          id="item-form-submit"
+        >
+          {labels ? labels.submit : "Create"}
+        </button>
+        <button
+          type="button"
+          form="item-form"
+          name="cancel"
+          id="item-form-cancel"
+          onClick={cancelHandler}
+        >
+          {labels ? labels.cancel : "Cancel"}
+        </button>
+      </div>
     </form>
   );
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import useItems from "../hooks/useItems";
+import { Link } from "react-router-dom";
+import ItemLink from "./ItemLink";
 
 export default function ItemListItem({ item }) {
   const items = useItems();
@@ -7,8 +9,10 @@ export default function ItemListItem({ item }) {
 
   return (
     <tr className="itemlist-item">
-      <td>{item.itemName}</td>
-      <td>{storedIn ? storedIn.itemName : "None"}</td>
+      <td>
+        <Link to={`/edit/${item._id}`}>{item.itemName}</Link>
+      </td>
+      <td>{storedIn ? <ItemLink item={storedIn} /> : ""}</td>
     </tr>
   );
 }
