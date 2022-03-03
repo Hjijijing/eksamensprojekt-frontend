@@ -14,7 +14,7 @@ body {
 
 .parent {
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   margin: none;
   padding: none;
   top: 0px;
@@ -24,8 +24,57 @@ body {
   justify-content: flex-start;
 }
 
-.parent > * {
+.navbar {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100%;
+
+  background-color: #333333;
+  height: 60px;
+  flex: 1 1 auto;
+  padding-left: 400px;
+  padding-right: 400px;
+}
+
+.navbarlink {
   flex: 1 1 0;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.navbarlink::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  height: 8px;
+  left: 0;
+  background-color: purple;
+  opacity: 100%;
+  width: 100%;
+  transform-origin: bottom middle;
+  transition: transform 0.2s ease-in;
+  transform: scale(0, 1);
+}
+
+.navbarlink:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbarlink.active::before {
+  transform: scale(1, 1);
+}
+
+.parent > * {
+  flex: 1 1 0px;
   height: 100%;
 }
 

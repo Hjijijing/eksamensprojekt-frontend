@@ -82,7 +82,7 @@ export default function ItemForm({
           value="Submit"
           id="item-form-submit"
         >
-          {labels ? labels.submit : "Create"}
+          {labels ? labels.submit : "Add"}
         </button>
         <button
           type="button"
