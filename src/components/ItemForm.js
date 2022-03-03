@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
+import ItemList from "./ItemList";
 import ItemSelect from "./ItemSelect";
 import PillSelector from "./PillSelector";
 
@@ -14,6 +15,7 @@ export default function ItemForm({
   const [description, setDescription] = useState(item.description ?? "");
   const [isContainer, setIsContainer] = useState(item.isContainer ?? false);
   const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
+  const items = useItems();
 
   function onSubmit(e) {
     e.preventDefault();
@@ -94,6 +96,15 @@ export default function ItemForm({
           {labels ? labels.cancel : "Cancel"}
         </button>
       </div>
+
+      {item._id && item.isContainer && (
+        <span id="storedinthis">
+          <p>Stored in this</p>
+          <ItemList
+            filter={(other) => items.isStoredIn(other, item._id)}
+          ></ItemList>
+        </span>
+      )}
     </form>
   );
 }

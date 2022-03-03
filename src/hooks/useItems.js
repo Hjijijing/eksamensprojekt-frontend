@@ -14,6 +14,14 @@ export function ItemsProvider({ children }) {
     return items.find((item) => item._id === id);
   }
 
+  function getItemsStoredIn(id) {
+    return items.filter((item) => isStoredIn(item, id));
+  }
+
+  function isStoredIn(item, id) {
+    return item.storedIn === id;
+  }
+
   function refreshItems() {
     axios.get("http://localhost:5000/items").then((res) => {
       setItems(res.data);
@@ -24,7 +32,13 @@ export function ItemsProvider({ children }) {
     refreshItems();
   }, []);
 
-  const result = { items, getItemById, refreshItems };
+  const result = {
+    items,
+    getItemById,
+    refreshItems,
+    isStoredIn,
+    getItemsStoredIn,
+  };
 
   return (
     <ItemsContext.Provider value={result}>{children}</ItemsContext.Provider>

@@ -4,7 +4,7 @@ import ItemListItem from "./ItemListItem";
 import useItems from "../hooks/useItems";
 import "../styles/itemlist.css";
 
-export default function ItemList() {
+export default function ItemList({ filter }) {
   const [searchTerm, setSearchTerm] = useState("");
   const items = useItems();
 
@@ -26,8 +26,11 @@ export default function ItemList() {
         </thead>
         <tbody>
           {items.items.map((item) => {
-            if (item.itemName.toLowerCase().includes(searchTerm.toLowerCase()))
-              return <ItemListItem key={item._id} item={item} />;
+            if (!filter || filter(item))
+              if (
+                item.itemName.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+                return <ItemListItem key={item._id} item={item} />;
           })}
         </tbody>
       </table>
