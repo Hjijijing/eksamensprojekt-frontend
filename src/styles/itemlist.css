@@ -63,15 +63,21 @@ body {
   opacity: 100%;
   width: 100%;
   transform-origin: bottom middle;
-  transition: transform 0.2s ease-in;
+  transition: transform 0.2s ease-in, height 0.1s ease-out;
   transform: scale(0, 1);
+  z-index: -1;
 }
 
-.navbarlink:hover {
+/* .navbarlink:hover {
   background-color: rgba(0, 0, 0, 0.3);
+} */
+
+.navbarlink:hover::before {
+  transform: scale(1, 1);
 }
 
 .navbarlink.active::before {
+  height: 100%;
   transform: scale(1, 1);
 }
 
