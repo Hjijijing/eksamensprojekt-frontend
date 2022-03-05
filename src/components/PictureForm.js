@@ -42,7 +42,7 @@ export default function PictureForm({ width, image, setImage }) {
       {cameraEnabled && <Webcam ref={webcamRef} />}
       {!cameraEnabled && (
         <div className="pictureform-image">
-          {image && <ItemImage image={image} alt="item" />}
+          <ItemImage image={image} placeholder={true} />
         </div>
       )}
       <div className="pictureform-options">

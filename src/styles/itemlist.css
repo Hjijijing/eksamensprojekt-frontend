@@ -22,8 +22,8 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  padding-left: 400px;
-  padding-right: 400px;
+  padding-left: 20vw;
+  padding-right: 20vw;
   overflow-x: hidden;
 }
 
@@ -38,8 +38,8 @@ body {
   background-color: #333333;
   height: 60px;
   flex: 1 1 auto;
-  padding-left: 400px;
-  padding-right: 400px;
+  padding-left: 20vw;
+  padding-right: 20vw;
 }
 
 .navbarlink {
@@ -113,6 +113,7 @@ body {
   border-radius: 10px;
   padding: 10px;
   border: 2px solid black;
+  font-size: 1.5rem;
 }
 
 .itemlist-list {
@@ -233,6 +234,7 @@ textarea {
   position: relative;
   display: flex;
   min-height: 300px;
+  max-height: 300px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
@@ -264,7 +266,6 @@ textarea {
 
 .pictureform-image {
   flex: 1 1 0;
-  background-color: red;
 }
 
 .pictureform-image img {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 const Buffer = require("buffer/").Buffer;
 
-export default function ItemImage({ image }) {
+export default function ItemImage({ image, placeholder }) {
   const [imageBase64, setImageBase64] = useState(null);
 
   useEffect(() => {
@@ -30,5 +30,12 @@ export default function ItemImage({ image }) {
 
   if (imageBase64)
     return <img src={imageBase64} alt="item" className="itemimage" />;
+  else if (placeholder)
+    return (
+      <img
+        src="https://via.placeholder.com/512/FFFFFF/000000?text=No+Image"
+        alt="placeholder"
+      ></img>
+    );
   else return <></>;
 }
