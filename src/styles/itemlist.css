@@ -5,6 +5,7 @@
 *::before {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 body {
@@ -103,6 +104,7 @@ body {
   align-items: stretch;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex: 1 1 0;
 }
 
 .itemlist-search {
@@ -118,6 +120,7 @@ body {
   width: 100%;
   margin-top: 10px;
   padding: 10px;
+  overflow-y: auto;
 }
 
 .itemlist-list td,
@@ -143,6 +146,9 @@ th {
   margin-bottom: 20px;
   padding: 20px;
   font-size: 1.5rem;
+  overflow-y: auto;
+  height: 100%;
+  flex: 1 1 0;
 }
 
 .item-form input,
@@ -151,6 +157,11 @@ textarea {
   resize: none;
   border-radius: 10px;
   font-size: 1.5rem;
+  flex: 1 1 auto;
+}
+
+.item-form textarea {
+  min-height: 100px;
 }
 
 #item-form-buttonrow {
@@ -158,6 +169,7 @@ textarea {
   flex-direction: row;
   width: 100%;
   gap: 10px;
+  flex: 1 1 auto;
 }
 
 #item-form-buttonrow button {
@@ -182,15 +194,12 @@ textarea {
   background-color: red;
 }
 
-#storedinthis p {
-}
-
 .pill-selector {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
-  height: 60px;
+  min-height: 60px;
   gap: 20px;
   padding: 5px;
 }
@@ -208,6 +217,7 @@ textarea {
   border-radius: 10px;
   background: none;
   color: var(--pill-selector-font-color);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .pill-selector-button:not(.selected-pill):hover {
@@ -217,6 +227,102 @@ textarea {
 .pill-selector-button.selected-pill {
   background: var(--pill-selector-background-color);
   color: var(--pill-selector-selected-font-color);
+}
+
+.pictureform {
+  position: relative;
+  display: flex;
+  min-height: 300px;
+  background-color: purple;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex: 1 1 auto;
+}
+
+.pictureform video {
+  flex: 1 1 0;
+  width: 50%;
+  height: 100%;
+}
+
+.pictureform-options {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-x: hidden;
+}
+
+.pictureform-image {
+  flex: 1 1 0;
+  background-color: red;
+}
+
+.pictureform-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pictureform #pictureform-fileinput {
+  display: none;
+}
+
+.picture-itemlist {
+  margin-top: 20px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.picture-itemlist-item {
+  justify-self: stretch;
+  position: relative;
+  flex: 1 0 150px;
+  /* height: 50px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  max-height: 150px;
+  /* background-color: red; */
+  padding-bottom: 10px;
+  border-bottom: 2px solid grey;
+  line-height: 10px;
+}
+
+.picture-itemlist-item #itemimage {
+  flex: 1 0 0;
+  height: 100%;
+  width: 100%;
+  /* background-color: blue; */
+}
+
+.picture-itemlist-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.picture-itemlist-item .iteminfo {
+  width: 100%;
+  flex: 3 0 0;
+  height: 100%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  overflow-x: hidden;
+}
+
+.picture-itemlist-item .iteminfo #itemName {
+  font-size: 1.5rem;
+}
+
+.picture-itemlist-item .iteminfo a {
+  text-decoration: none;
+  text-overflow: clip;
 }
 
 /*
@@ -236,4 +342,4 @@ textarea {
   display: flex;
   flex-direction: row;
 }
-*/
+*/ ;

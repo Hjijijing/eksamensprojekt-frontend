@@ -10,7 +10,7 @@ export default function ItemListItem({ item }) {
   return (
     <tr className="itemlist-item">
       <td>
-        <Link to={`/edit/${item._id}`}>{item.itemName}</Link>
+        <ItemLink item={item} />
       </td>
       <td>{storedIn ? <ItemLink item={storedIn} /> : ""}</td>
     </tr>

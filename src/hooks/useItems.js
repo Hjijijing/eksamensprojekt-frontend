@@ -32,6 +32,8 @@ export function ItemsProvider({ children }) {
     refreshItems();
   }, []);
 
+  console.log(items);
+
   const result = {
     items,
     getItemById,

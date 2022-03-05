@@ -11,9 +11,13 @@ export default function ItemCreator() {
   const navigate = useNavigate();
 
   function submitHandler(data) {
-    console.log(data);
     setEnabled(false);
-    axios.post("http://localhost:5000/items", data).then((res) => {
+
+    const formData = new FormData();
+    formData.append("image", data.image);
+    formData.append("item", JSON.stringify(data.item));
+
+    axios.post("http://localhost:5000/items", formData).then((res) => {
       setEnabled(true);
       setItem({});
       items.refreshItems();

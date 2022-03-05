@@ -3,6 +3,7 @@ import axios from "axios";
 import ItemListItem from "./ItemListItem";
 import useItems from "../hooks/useItems";
 import "../styles/itemlist.css";
+import Searchbar from "./Searchbar";
 
 export default function ItemList({ filter }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,13 +11,7 @@ export default function ItemList({ filter }) {
 
   return (
     <div className="itemlist-container">
-      <input
-        className="itemlist-search"
-        type="text"
-        placeholder="Search Items..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <table className="itemlist-list card">
         <thead>
           <tr>

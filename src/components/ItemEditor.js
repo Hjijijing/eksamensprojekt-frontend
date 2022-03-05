@@ -14,7 +14,12 @@ export default function ItemEditor() {
 
   function submitHandler(data) {
     setEnabled(false);
-    axios.put(`http://localhost:5000/items/${item._id}`, data).then(() => {
+
+    const formData = new FormData();
+    formData.append("image", data.image);
+    formData.append("item", JSON.stringify(data.item));
+
+    axios.put(`http://localhost:5000/items/${item._id}`, formData).then(() => {
       setEnabled(true);
       alert("Item updated");
       items.refreshItems();

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
+import PictureForm from "./PictureForm";
 import ItemList from "./ItemList";
 import ItemSelect from "./ItemSelect";
 import PillSelector from "./PillSelector";
@@ -15,16 +16,20 @@ export default function ItemForm({
   const [description, setDescription] = useState(item.description ?? "");
   const [isContainer, setIsContainer] = useState(item.isContainer ?? false);
   const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
+  const [image, setImage] = useState(item.image ?? null);
   const items = useItems();
 
   function onSubmit(e) {
     e.preventDefault();
     if (enabled)
       submitHandler({
-        itemName,
-        description,
-        isContainer,
-        storedIn: storedIn === "None" ? null : storedIn,
+        image: image,
+        item: {
+          itemName,
+          description,
+          isContainer,
+          storedIn: storedIn === "None" ? null : storedIn,
+        },
       });
   }
 
@@ -33,6 +38,7 @@ export default function ItemForm({
     setDescription(item.description ?? "");
     setIsContainer(item.isContainer ?? false);
     setStoredIn(item.storedIn ?? "None");
+    setImage(item.image ?? null);
   }, [item]);
 
   return (
@@ -44,6 +50,7 @@ export default function ItemForm({
         placeholder="Item Name"
         id="item-form-itemname"
         onChange={(e) => setItemName(e.target.value)}
+        className="card"
       />
       <textarea
         value={description}
@@ -52,6 +59,7 @@ export default function ItemForm({
         placeholder="Description"
         id="item-form-description"
         form="item-form"
+        className="card"
         onChange={(e) => setDescription(e.target.value)}
       />
       {/* <input
@@ -76,6 +84,7 @@ export default function ItemForm({
           setStoredIn(e.value);
         }}
       />
+      <PictureForm image={image} setImage={setImage} />
       <div id="item-form-buttonrow">
         <button
           type="submit"
@@ -83,6 +92,7 @@ export default function ItemForm({
           name="submit"
           value="Submit"
           id="item-form-submit"
+          className="card"
         >
           {labels ? labels.submit : "Add"}
         </button>
@@ -91,6 +101,7 @@ export default function ItemForm({
           form="item-form"
           name="cancel"
           id="item-form-cancel"
+          className="card"
           onClick={cancelHandler}
         >
           {labels ? labels.cancel : "Cancel"}
