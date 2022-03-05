@@ -3,7 +3,7 @@ import useItems from "../hooks/useItems";
 import { Link } from "react-router-dom";
 import ItemLink from "./ItemLink";
 
-export default function ItemListItem({ item }) {
+export default function TableItemListItem({ item }) {
   const items = useItems();
   const storedIn = items.getItemById(item.storedIn);
 

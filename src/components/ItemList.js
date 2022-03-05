@@ -1,34 +1,43 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ItemListItem from "./ItemListItem";
+import React, { useState } from "react";
 import useItems from "../hooks/useItems";
-import "../styles/itemlist.css";
+import PictureItemList from "./PictureItemList";
+import PillSelector from "./PillSelector";
 import Searchbar from "./Searchbar";
+import TableItemList from "./TableItemList";
 
-export default function ItemList({ filter }) {
+export default function ItemList({
+  filter,
+  tableMode = true,
+  modeToggle = false,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [useTableMode, setUseTableMode] = useState(tableMode);
   const items = useItems();
 
+  const itemsToShow = items.items.filter((item) => {
+    if (!filter || filter(item))
+      return item.itemName.toLowerCase().includes(searchTerm.toLowerCase());
+    return false;
+  });
+
   return (
-    <div className="itemlist-container">
+    <div className="itemlist">
       <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <table className="itemlist-list card">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Stored In</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.items.map((item) => {
-            if (!filter || filter(item))
-              if (
-                item.itemName.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-                return <ItemListItem key={item._id} item={item} />;
-          })}
-        </tbody>
-      </table>
+      {modeToggle && (
+        <PillSelector
+          options={[
+            { value: false, label: "Images" },
+            { value: true, label: "Table" },
+          ]}
+          value={useTableMode}
+          onChange={setUseTableMode}
+        />
+      )}
+      {useTableMode ? (
+        <TableItemList items={itemsToShow} />
+      ) : (
+        <PictureItemList items={itemsToShow} />
+      )}
     </div>
   );
 }

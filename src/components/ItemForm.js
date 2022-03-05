@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
 import PictureForm from "./PictureForm";
-import ItemList from "./ItemList";
+import TableItemList from "./TableItemList";
 import ItemSelect from "./ItemSelect";
 import PillSelector from "./PillSelector";
+import ItemList from "./ItemList";
 
 export default function ItemForm({
   submitHandler,
@@ -113,6 +114,8 @@ export default function ItemForm({
           <p>Stored in this</p>
           <ItemList
             filter={(other) => items.isStoredIn(other, item._id)}
+            modeToggle={false}
+            tableMode={true}
           ></ItemList>
         </span>
       )}

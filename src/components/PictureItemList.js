@@ -3,17 +3,11 @@ import useItems from "../hooks/useItems";
 import PictureItemListItem from "./PictureItemListItem";
 import Searchbar from "./Searchbar";
 
-export default function PictureItemList({ filter }) {
-  const items = useItems();
-  const [searchTerm, setSearchTerm] = useState("");
-
+export default function PictureItemList({ items }) {
   return (
     <div className="picture-itemlist">
-      <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {items.items.map((item) => {
-        if (!filter || filter(item))
-          if (item.itemName.toLowerCase().includes(searchTerm.toLowerCase()))
-            return <PictureItemListItem item={item} />;
+      {items.map((item) => {
+        return <PictureItemListItem item={item} />;
       })}
     </div>
   );

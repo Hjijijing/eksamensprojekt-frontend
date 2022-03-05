@@ -2,6 +2,19 @@ import React, { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import ItemImage from "./ItemImage";
 
+const handleDragEnter = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+const handleDragLeave = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+const handleDragOver = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
 export default function PictureForm({ width, image, setImage }) {
   const webcamRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -25,8 +38,16 @@ export default function PictureForm({ width, image, setImage }) {
   function fileSelected(e) {
     e.stopPropagation();
     e.preventDefault();
-    setUploadName(e.target.files[0].name);
-    setImage(e.target.files[0]);
+    selectFile(e.target.files[0]);
+  }
+
+  function selectFile(file) {
+    if (file && file.type.split("/")[0] === "image") {
+      setUploadName(file.name);
+      setImage(file);
+    } else {
+      alert("Invalid file");
+    }
     fileInputRef.current.value = null;
   }
 
@@ -37,8 +58,22 @@ export default function PictureForm({ width, image, setImage }) {
     }
   }, [image]);
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer.items && e.dataTransfer.items.length === 1) {
+      selectFile(e.dataTransfer.items[0].getAsFile());
+    }
+  };
+
   return (
-    <div className="pictureform">
+    <div
+      className="pictureform"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDragEnter={handleDragEnter}
+    >
       {cameraEnabled && <Webcam ref={webcamRef} />}
       {!cameraEnabled && (
         <div className="pictureform-image">

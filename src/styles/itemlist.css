@@ -10,6 +10,7 @@
 body {
   margin: 0;
   padding: 0;
+  background: #dddddd;
 }
 
 .parent {
@@ -53,6 +54,10 @@ body {
   position: relative;
 }
 
+.navbarlink.active {
+  color: #333333;
+}
+
 .navbarlink::before {
   content: "";
   display: block;
@@ -60,7 +65,7 @@ body {
   bottom: 0px;
   height: 8px;
   left: 0;
-  background-color: purple;
+  background-color: #ffc107;
   opacity: 100%;
   width: 100%;
   transform-origin: bottom middle;
@@ -91,9 +96,10 @@ body {
   border-radius: 10px;
   border: 1px solid lightgrey;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
 }
 
-.itemlist-container {
+.itemlist {
   display: flex;
   /* min-width: 100%;
   min-height: 100%;*/
@@ -104,7 +110,11 @@ body {
   align-items: stretch;
   margin-top: 20px;
   flex: 1 1 0;
+  gap: 10px;
 }
+/* 
+.itemlist-container {
+} */
 
 .itemlist-search {
   position: sticky;
@@ -188,11 +198,11 @@ textarea {
 }
 
 #item-form-submit {
-  background-color: blue;
+  background-color: #1976d2;
 }
 
 #item-form-cancel {
-  background-color: red;
+  background-color: #ff5252;
 }
 
 .pill-selector {
@@ -202,11 +212,10 @@ textarea {
   align-items: stretch;
   min-height: 60px;
   gap: 20px;
-  padding: 5px;
 }
 
 .pill-selector-button {
-  --pill-selector-background-color: purple;
+  --pill-selector-background-color: #1976d2;
   --pill-selector-selected-font-color: white;
   --pill-selector-font-color: black;
   font-size: 1.5rem;
@@ -216,7 +225,7 @@ textarea {
   margin: none;
   /* text-transform: uppercase; */
   border-radius: 10px;
-  background: none;
+  background-color: white;
   color: var(--pill-selector-font-color);
   transition: background-color 0.2s, color 0.2s;
 }
@@ -245,6 +254,7 @@ textarea {
   flex: 1 1 0;
   width: 50%;
   height: 100%;
+  border: 2px solid #1976d2;
 }
 
 .pictureform-options {
@@ -258,7 +268,7 @@ textarea {
 }
 
 .pictureform-options button {
-  background-color: blue;
+  background-color: #1976d2;
   color: white;
   padding: 10px;
   font-size: 1rem;
@@ -272,6 +282,7 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border: 2px solid #1976d2;
 }
 
 .pictureform #pictureform-fileinput {
