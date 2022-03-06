@@ -142,6 +142,11 @@ th {
   padding-bottom: 5px;
 }
 
+.itemlist-list td,
+th:first-child {
+  width: 5%;
+}
+
 .itemlist-list td {
   border-top: 1px solid lightgrey;
 }
