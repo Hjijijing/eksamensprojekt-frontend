@@ -20,12 +20,12 @@ function toggleSelection(item) {
 }
 
 export default function TableItemList({ items }) {
-  const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
   function selectItem(item) {
-    setSelectedItems(toggleSelection(item));
-
+    const newSelection = toggleSelection(item)(selectedItems);
+    setSelectedItems((s) => newSelection);
     console.log(selectedItems);
   }
 
