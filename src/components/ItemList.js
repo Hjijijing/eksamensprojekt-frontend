@@ -9,6 +9,7 @@ export default function ItemList({
   filter,
   tableMode = true,
   modeToggle = false,
+  bulkactions = false,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [useTableMode, setUseTableMode] = useState(tableMode);
@@ -34,7 +35,7 @@ export default function ItemList({
         />
       )}
       {useTableMode ? (
-        <TableItemList items={itemsToShow} />
+        <TableItemList items={itemsToShow} bulkactions={bulkactions} />
       ) : (
         <PictureItemList items={itemsToShow} />
       )}

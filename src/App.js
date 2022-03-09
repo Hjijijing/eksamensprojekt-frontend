@@ -20,7 +20,13 @@ function App() {
               {/* <Route path="/" element={<PictureItemList />} /> */}
               <Route
                 path="/"
-                element={<ItemList tableMode={false} modeToggle={true} />}
+                element={
+                  <ItemList
+                    tableMode={false}
+                    modeToggle={true}
+                    bulkactions={true}
+                  />
+                }
               />
               <Route path="/create" element={<ItemCreator />} />
               <Route path="/edit/:id" element={<ItemEditor />} />

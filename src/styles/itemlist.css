@@ -143,7 +143,7 @@ th {
 }
 
 .itemlist-list td,
-th:first-child {
+th#checkbox {
   width: 5%;
 }
 

@@ -4,13 +4,15 @@ import TableItemListItem from "./TableItemListItem";
 import useItems from "../hooks/useItems";
 import "../styles/itemlist.css";
 import Searchbar from "./Searchbar";
+import ItemSelect from "./ItemSelect";
+import useBulkActions from "../hooks/useBulkActions";
 
 function toggleSelection(item) {
   return (arr) => {
-    if (!arr.includes(item._id)) {
-      arr.push(item._id);
+    if (!arr.includes(item)) {
+      arr.push(item);
     } else {
-      const index = arr.indexOf(item._id);
+      const index = arr.indexOf(item);
       if (index > -1) {
         arr.splice(index, 1);
       }
@@ -19,42 +21,69 @@ function toggleSelection(item) {
   };
 }
 
-export default function TableItemList({ items }) {
+export default function TableItemList({ items, bulkactions }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
+  const [moveTo, setMoveTo] = useState(null);
+
+  const { bulkMoveTo } = useBulkActions();
+
   function selectItem(item) {
     const newSelection = toggleSelection(item)(selectedItems);
-    setSelectedItems((s) => newSelection);
-    console.log(selectedItems);
+    setSelectedItems([...newSelection]);
   }
 
-  console.log("Hello");
+  const anyItemsSelected = selectAll || selectedItems.length > 0;
+
   return (
     <div className="itemlist-container">
+      {anyItemsSelected && (
+        <div className="bulk-moveto">
+          <ItemSelect
+            filter={(item) => item.isContainer}
+            value={moveTo}
+            itemChanged={(e) => {
+              setMoveTo(e.value);
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              bulkMoveTo(selectAll ? items : selectedItems, moveTo);
+            }}
+          >
+            Bulk move items
+          </button>
+        </div>
+      )}
+
       <table className="itemlist-list card">
         <thead>
           <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selectAll}
-                onChange={(e) => {
-                  setSelectAll(e.target.checked);
-                }}
-              ></input>
-            </th>
+            {bulkactions && (
+              <th id="checkbox">
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={(e) => {
+                    setSelectAll(e.target.checked);
+                  }}
+                ></input>
+              </th>
+            )}
             <th>Item Name</th>
             <th>Stored In</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item) => {
-            const isSelected = selectedItems.includes(item._id) || selectAll;
+            const isSelected = selectedItems.includes(item) || selectAll;
             return (
               <TableItemListItem
                 key={item._id}
                 item={item}
+                selectable={bulkactions}
                 selected={isSelected}
                 setSelected={selectItem}
               />
