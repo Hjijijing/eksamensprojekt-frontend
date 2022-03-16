@@ -1,4 +1,5 @@
 import React from "react";
+import "./firebase/firebaseConfig";
 import { ItemsProvider } from "./hooks/useItems";
 import TableItemList from "./components/TableItemList";
 import ItemCreator from "./components/ItemCreator";
