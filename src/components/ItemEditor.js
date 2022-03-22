@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 export default function ItemEditor() {
   const [enabled, setEnabled] = useState(true);
   const items = useItems();
+  const { updateItem, deleteItem } = items;
 
   const { id } = useParams();
   const item = items.getItemById(id);
@@ -19,19 +20,15 @@ export default function ItemEditor() {
     formData.append("image", data.image);
     formData.append("item", JSON.stringify(data.item));
 
-    axios.put(`http://localhost:5000/items/${item._id}`, formData).then(() => {
+    updateItem(item._id, formData).then((res) => {
       setEnabled(true);
-      alert("Item updated");
-      items.refreshItems();
     });
   }
 
   function cancelHandler(e) {
     setEnabled(false);
-    axios.delete(`http://localhost:5000/items/${item._id}`).then(() => {
-      items.refreshItems();
+    deleteItem(id).then(() => {
       navigate("/");
-      alert("item deleted");
     });
   }
 

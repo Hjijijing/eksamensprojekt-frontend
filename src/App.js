@@ -1,6 +1,7 @@
 import React from "react";
 import "./firebase/firebaseConfig";
 import { ItemsProvider } from "./hooks/useItems";
+import { UserProvider } from "./hooks/useUser";
 import TableItemList from "./components/TableItemList";
 import ItemCreator from "./components/ItemCreator";
 import ItemEditor from "./components/ItemEditor";
@@ -12,29 +13,31 @@ import ItemList from "./components/ItemList";
 function App() {
   return (
     <Router>
-      <ItemsProvider>
-        <div className="everything">
-          <Navbar />
-          <div className="parent">
-            <Routes>
-              {/* <Route path="/" element={<ItemList />} /> */}
-              {/* <Route path="/" element={<PictureItemList />} /> */}
-              <Route
-                path="/"
-                element={
-                  <ItemList
-                    tableMode={false}
-                    modeToggle={true}
-                    bulkactions={true}
-                  />
-                }
-              />
-              <Route path="/create" element={<ItemCreator />} />
-              <Route path="/edit/:id" element={<ItemEditor />} />
-            </Routes>
+      <UserProvider>
+        <ItemsProvider>
+          <div className="everything">
+            <Navbar />
+            <div className="parent">
+              <Routes>
+                {/* <Route path="/" element={<ItemList />} /> */}
+                {/* <Route path="/" element={<PictureItemList />} /> */}
+                <Route
+                  path="/"
+                  element={
+                    <ItemList
+                      tableMode={false}
+                      modeToggle={true}
+                      bulkactions={true}
+                    />
+                  }
+                />
+                <Route path="/create" element={<ItemCreator />} />
+                <Route path="/edit/:id" element={<ItemEditor />} />
+              </Routes>
+            </div>
           </div>
-        </div>
-      </ItemsProvider>
+        </ItemsProvider>
+      </UserProvider>
     </Router>
   );
 }

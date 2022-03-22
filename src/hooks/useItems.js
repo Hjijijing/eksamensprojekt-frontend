@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
+import useUser from "./useUser";
 
 const ItemsContext = React.createContext();
 
@@ -9,6 +10,8 @@ export default function useItems() {
 
 export function ItemsProvider({ children }) {
   const [items, setItems] = useState([]);
+
+  const { token } = useUser();
 
   function getItemById(id) {
     return items.find((item) => item._id === id);
@@ -22,15 +25,64 @@ export function ItemsProvider({ children }) {
     return item.storedIn === id;
   }
 
-  function refreshItems() {
-    axios.get("http://localhost:5000/items").then((res) => {
-      setItems(res.data);
-    });
-  }
+  const refreshItems = useCallback(() => {
+    axios
+      .get("http://localhost:5000/items", {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        setItems(res.data);
+      });
+  }, [token]);
 
   useEffect(() => {
     refreshItems();
-  }, []);
+  }, [token, refreshItems]);
+
+  const createItem = useCallback(
+    (formData) => {
+      return axios
+        .post("http://localhost:5000/items", formData, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then((res) => {
+          refreshItems();
+          alert("Item created");
+          return true;
+        });
+    },
+    [token, refreshItems]
+  );
+
+  const updateItem = useCallback(
+    (id, formData) => {
+      return axios
+        .put(`http://localhost:5000/items/${id}`, formData, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          refreshItems();
+          alert("Item updated");
+          return true;
+        });
+    },
+    [token, refreshItems]
+  );
+
+  const deleteItem = useCallback(
+    (id, formData) => {
+      return axios
+        .delete(`http://localhost:5000/items/${id}`, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          refreshItems();
+          alert("item deleted");
+          return true;
+        });
+    },
+    [token, refreshItems]
+  );
 
   console.log(items);
 
@@ -40,6 +92,9 @@ export function ItemsProvider({ children }) {
     refreshItems,
     isStoredIn,
     getItemsStoredIn,
+    createItem,
+    updateItem,
+    deleteItem,
   };
 
   return (
