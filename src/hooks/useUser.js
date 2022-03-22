@@ -26,7 +26,7 @@ export function UserProvider({ children }) {
   }, []);
 
   const logOut = useCallback(() => {
-    signOut().then(() => {
+    auth.signOut().then(() => {
       setToken("");
       setUserInfo(null);
     });
@@ -34,6 +34,10 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     auth.onAuthStateChanged((credentials) => {
+      if (!credentials) {
+        setToken("");
+        return;
+      }
       console.log(credentials);
       setToken(credentials.accessToken);
     });
@@ -52,6 +56,7 @@ export function UserProvider({ children }) {
   const result = {
     token,
     loginWithGoogle,
+    logOut,
     userInfo,
   };
 

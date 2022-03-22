@@ -2,40 +2,15 @@ import React from "react";
 import "./firebase/firebaseConfig";
 import { ItemsProvider } from "./hooks/useItems";
 import { UserProvider } from "./hooks/useUser";
-import TableItemList from "./components/TableItemList";
-import ItemCreator from "./components/ItemCreator";
-import ItemEditor from "./components/ItemEditor";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import PictureItemList from "./components/PictureItemList";
-import ItemList from "./components/ItemList";
+import { BrowserRouter as Router } from "react-router-dom";
+import MainContent from "./MainContent";
 
 function App() {
   return (
     <Router>
       <UserProvider>
         <ItemsProvider>
-          <div className="everything">
-            <Navbar />
-            <div className="parent">
-              <Routes>
-                {/* <Route path="/" element={<ItemList />} /> */}
-                {/* <Route path="/" element={<PictureItemList />} /> */}
-                <Route
-                  path="/"
-                  element={
-                    <ItemList
-                      tableMode={false}
-                      modeToggle={true}
-                      bulkactions={true}
-                    />
-                  }
-                />
-                <Route path="/create" element={<ItemCreator />} />
-                <Route path="/edit/:id" element={<ItemEditor />} />
-              </Routes>
-            </div>
-          </div>
+          <MainContent />
         </ItemsProvider>
       </UserProvider>
     </Router>

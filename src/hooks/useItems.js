@@ -31,12 +31,16 @@ export function ItemsProvider({ children }) {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        setItems(res.data);
+        setItems([...res.data]);
+      })
+      .catch((error) => {
+        setItems([]);
       });
   }, [token]);
 
   useEffect(() => {
     refreshItems();
+    console.log("HEA");
   }, [token, refreshItems]);
 
   const createItem = useCallback(
