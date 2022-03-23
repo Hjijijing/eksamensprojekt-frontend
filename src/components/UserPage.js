@@ -51,10 +51,10 @@ export default function UserPage() {
         text={twitter ? "Linked" : "Connect to Twitter"}
         clickHandler={twitter ? null : linkWithTwitter}
       />
-      <FacebookButton
+      {/* <FacebookButton
         text={facebook ? "Linked" : "Connect to Facebook"}
         clickHandler={facebook ? null : linkWithFacebook}
-      />
+      /> */}
       <GithubButton
         text={github ? "Linked" : "Connect to Github"}
         clickHandler={github ? null : linkWithGithub}

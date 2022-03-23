@@ -11,6 +11,10 @@ import {
   signInWithPopup,
   signOut,
   linkWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  linkWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 const auth = getAuth();
 
@@ -50,6 +54,14 @@ export function UserProvider({ children }) {
     loginWithProvider(GithubProvider);
   }, [loginWithProvider]);
 
+  const loginWithEmail = useCallback((email, password) => {
+    signInWithEmailAndPassword(auth, email, password).then(() => {});
+  }, []);
+
+  const createEmailAccount = useCallback((email, password) => {
+    createUserWithEmailAndPassword(auth, email, password).then((cred) => {});
+  }, []);
+
   const linkWithGoogle = useCallback(() => {
     linkProvider(GoogleProvider);
   }, [linkProvider]);
@@ -62,13 +74,17 @@ export function UserProvider({ children }) {
   const linkWithGithub = useCallback(() => {
     linkProvider(GithubProvider);
   }, [linkProvider]);
+  const linkWithEmail = useCallback((email, password) => {
+    const credential = EmailAuthProvider.credential(email, password);
+    linkWithCredential(auth.currentUser, credential).then(() => {});
+  }, []);
 
   const logOut = useCallback(() => {
     auth.signOut().then(() => {
-      setToken("");
       setUserInfo(null);
+      setToken("");
     });
-  });
+  }, []);
 
   useEffect(() => {
     return auth.onAuthStateChanged((credentials) => {
@@ -97,10 +113,13 @@ export function UserProvider({ children }) {
     loginWithTwitter,
     loginWithFacebook,
     loginWithGithub,
+    loginWithEmail,
     linkWithGoogle,
     linkWithTwitter,
     linkWithFacebook,
     linkWithGithub,
+    linkWithEmail,
+    createEmailAccount,
     logOut,
     userInfo,
   };

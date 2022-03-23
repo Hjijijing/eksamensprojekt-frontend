@@ -17,6 +17,7 @@ export default function ItemEditor() {
     setEnabled(false);
 
     const formData = new FormData();
+
     formData.append("image", data.image);
     formData.append("item", JSON.stringify(data.item));
 

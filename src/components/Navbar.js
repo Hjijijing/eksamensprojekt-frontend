@@ -15,6 +15,10 @@ export default function Navbar() {
 
   const { userInfo, logOut, loginWithGoogle } = useUser();
 
+  let displayName = "";
+  if (userInfo && userInfo.userName) displayName = userInfo.userName;
+  else if (auth.currentUser && auth.currentUser.email)
+    displayName = auth.currentUser.email;
   return (
     <div className="header">
       <div className="header-user">
@@ -25,9 +29,16 @@ export default function Navbar() {
                 navigate("/account");
               }}
             >
-              {userInfo.userName}
+              {displayName}
             </p>
-            <FaSignOutAlt size="1.5em" onClick={logOut} alt="Sign Out" />
+            <FaSignOutAlt
+              size="1.5em"
+              onClick={() => {
+                navigate("/login");
+                logOut();
+              }}
+              alt="Sign Out"
+            />
           </>
         )}
       </div>

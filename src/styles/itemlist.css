@@ -38,11 +38,11 @@ body {
   position: absolute;
   /* background-color: red; */
   right: 0px;
-  width: 10vw;
+  width: 100vw;
   bottom: 0px;
   top: 0px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -58,7 +58,8 @@ body {
   height: 100%;
 }
 
-.header-user svg:hover {
+.header-user svg:hover,
+p:hover {
   opacity: 0.8;
 }
 
@@ -404,7 +405,52 @@ textarea {
   right: 50%;
 }
 
-#loginform {
+@media only screen and (max-width: 1000px) {
+  .loginpage {
+    flex-direction: column;
+  }
+
+  .loginpage::before {
+    content: initial;
+    /* bottom: initial;
+    width: initial;
+    top: 50%;
+    right: 5%;
+    left: 5%;
+    height: 1px; */
+  }
+  .parent {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .header-user {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  * {
+    font-size: 4vw;
+  }
+}
+
+@media only screen and (max-height: 600px) and (min-height: 1000px) {
+  .loginpage,
+  .signuppage {
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    min-height: 100%;
+  }
+}
+
+#loginform,
+#signupform {
   flex: 1 1 0px;
   display: flex;
   flex-direction: column;
@@ -413,13 +459,23 @@ textarea {
   gap: 20px;
 }
 
-#loginform input {
+#loginform input,
+#signupform input {
   padding: 10px;
 }
 
 #loginform input,
+button,
+#signupform input,
 button {
   flex: 0 1 50px;
+}
+
+#loginform p,
+#signupform p {
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .loginproviders {
@@ -457,6 +513,23 @@ button {
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;
+}
+
+.signuppage {
+  position: relative;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 40px;
+  margin-bottom: 50vh;
+}
+
+#signupform .nomatch {
+  color: lightcoral;
+  border-color: lightcoral;
 }
 /*
 .itemlist-list {

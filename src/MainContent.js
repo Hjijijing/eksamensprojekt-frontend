@@ -9,6 +9,7 @@ import useUser from "./hooks/useUser";
 import Redirector from "./components/LoginRedirector";
 import LoginPage from "./components/LoginPage";
 import UserPage from "./components/UserPage";
+import SignupPage from "./components/SignupPage";
 
 export default function MainContent() {
   const { token } = useUser();
@@ -23,7 +24,6 @@ export default function MainContent() {
           {}
           {token !== "" ? (
             <>
-              {" "}
               <Route
                 path="/"
                 element={
@@ -42,6 +42,7 @@ export default function MainContent() {
           ) : (
             <>
               <Route path="/login" element={<LoginPage></LoginPage>} />
+              <Route path="/signup" element={<SignupPage></SignupPage>} />
               <Route path="/*" element={<Redirector to="/login" />} />
             </>
           )}
