@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import axios from "axios";
-import provider from "../firebase/firebaseAuth";
+import {
+  GoogleProvider,
+  TwitterProvider,
+  FacebookProvider,
+  GithubProvider,
+} from "../firebase/firebaseAuth";
 import {
   getAuth,
   signInWithPopup,
-  GoogleAuthProvider,
   signOut,
+  linkWithPopup,
 } from "firebase/auth";
 const auth = getAuth();
 
@@ -19,11 +24,44 @@ export function UserProvider({ children }) {
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
-  const loginWithGoogle = useCallback(() => {
+  const loginWithProvider = useCallback((provider) => {
     signInWithPopup(auth, provider).then((credentials) => {
       console.log(credentials);
     });
   }, []);
+
+  const linkProvider = useCallback((provider) => {
+    linkWithPopup(auth.currentUser, provider).then((result) => {});
+  }, []);
+
+  const loginWithGoogle = useCallback(() => {
+    loginWithProvider(GoogleProvider);
+  }, [loginWithProvider]);
+
+  const loginWithTwitter = useCallback(() => {
+    loginWithProvider(TwitterProvider);
+  }, [loginWithProvider]);
+
+  const loginWithFacebook = useCallback(() => {
+    loginWithProvider(FacebookProvider);
+  }, [loginWithProvider]);
+
+  const loginWithGithub = useCallback(() => {
+    loginWithProvider(GithubProvider);
+  }, [loginWithProvider]);
+
+  const linkWithGoogle = useCallback(() => {
+    linkProvider(GoogleProvider);
+  }, [linkProvider]);
+  const linkWithTwitter = useCallback(() => {
+    linkProvider(TwitterProvider);
+  }, [linkProvider]);
+  const linkWithFacebook = useCallback(() => {
+    linkProvider(FacebookProvider);
+  }, [linkProvider]);
+  const linkWithGithub = useCallback(() => {
+    linkProvider(GithubProvider);
+  }, [linkProvider]);
 
   const logOut = useCallback(() => {
     auth.signOut().then(() => {
@@ -33,7 +71,7 @@ export function UserProvider({ children }) {
   });
 
   useEffect(() => {
-    auth.onAuthStateChanged((credentials) => {
+    return auth.onAuthStateChanged((credentials) => {
       if (!credentials) {
         setToken("");
         return;
@@ -56,6 +94,13 @@ export function UserProvider({ children }) {
   const result = {
     token,
     loginWithGoogle,
+    loginWithTwitter,
+    loginWithFacebook,
+    loginWithGithub,
+    linkWithGoogle,
+    linkWithTwitter,
+    linkWithFacebook,
+    linkWithGithub,
     logOut,
     userInfo,
   };

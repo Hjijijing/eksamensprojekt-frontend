@@ -1,9 +1,32 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  TwitterAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+} from "firebase/auth";
 
-const provider = new GoogleAuthProvider();
+const GoogleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+GoogleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export default provider;
+const TwitterProvider = new TwitterAuthProvider();
+
+TwitterProvider.setCustomParameters({
+  prompt: "select_account",
+});
+
+const FacebookProvider = new FacebookAuthProvider();
+
+FacebookProvider.setCustomParameters({
+  prompt: "select_account",
+});
+
+const GithubProvider = new GithubAuthProvider();
+
+GithubProvider.setCustomParameters({
+  prompt: "select_account",
+});
+
+export { GoogleProvider, TwitterProvider, FacebookProvider, GithubProvider };

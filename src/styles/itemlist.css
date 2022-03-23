@@ -48,7 +48,7 @@ body {
   flex-direction: row;
   justify-content: flex-end;
   gap: 20px;
-  align-items: stretch;
+  align-items: center;
 
   vertical-align: middle;
   line-height: 60px;
@@ -382,6 +382,83 @@ textarea {
   text-overflow: clip;
 }
 
+.loginpage {
+  position: relative;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 40px;
+  margin-bottom: 50vh;
+}
+
+/*Divider*/
+.loginpage::before {
+  position: absolute;
+  content: "";
+  top: 5%;
+  bottom: 5%;
+  width: 1px;
+  background-color: lightgrey;
+  right: 50%;
+}
+
+#loginform {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 20px;
+}
+
+#loginform input {
+  padding: 10px;
+}
+
+#loginform input,
+button {
+  flex: 0 1 50px;
+}
+
+.loginproviders {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 10px;
+
+  flex: 1 1 0px;
+}
+
+.iconbutton {
+  width: 100%;
+  height: 50px;
+  border: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+.account #email {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+}
+
+.account {
+  margin-top: 10px;
+  padding: 30px;
+  margin-bottom: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
 /*
 .itemlist-list {
   flex-grow: 1;

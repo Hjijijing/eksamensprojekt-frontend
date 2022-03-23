@@ -18,15 +18,16 @@ export default function Navbar() {
   return (
     <div className="header">
       <div className="header-user">
-        {userInfo ? (
+        {userInfo && (
           <>
-            {userInfo.userName}{" "}
+            <p
+              onClick={() => {
+                navigate("/account");
+              }}
+            >
+              {userInfo.userName}
+            </p>
             <FaSignOutAlt size="1.5em" onClick={logOut} alt="Sign Out" />
-          </>
-        ) : (
-          <>
-            Sign In{" "}
-            <VscAccount size="1.5em" onClick={loginWithGoogle} alt="Sign In" />
           </>
         )}
       </div>

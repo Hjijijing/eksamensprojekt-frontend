@@ -7,6 +7,8 @@ import ItemCreator from "./components/ItemCreator";
 import ItemEditor from "./components/ItemEditor";
 import useUser from "./hooks/useUser";
 import Redirector from "./components/LoginRedirector";
+import LoginPage from "./components/LoginPage";
+import UserPage from "./components/UserPage";
 
 export default function MainContent() {
   const { token } = useUser();
@@ -33,12 +35,13 @@ export default function MainContent() {
                 }
               />
               <Route path="/create" element={<ItemCreator />} />
-              <Route path="/edit/:id" element={<ItemEditor />} />{" "}
+              <Route path="/edit/:id" element={<ItemEditor />} />
+              <Route path="/account" element={<UserPage />} />
               <Route path="/*" element={<Redirector to="/" />} />
             </>
           ) : (
             <>
-              <Route path="/login" element={<></>} />
+              <Route path="/login" element={<LoginPage></LoginPage>} />
               <Route path="/*" element={<Redirector to="/login" />} />
             </>
           )}
