@@ -20,7 +20,7 @@ export default function useBulkActions() {
           })
         );
         promises.push(
-          axios.put(`http://localhost:5000/items/${item._id}`, data)
+          axios.put(`${process.env.REACT_APP_API_LINK}/items/${item._id}`, data)
         );
       });
 

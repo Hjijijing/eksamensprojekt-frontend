@@ -5,7 +5,7 @@ export default function ItemImage({ image, placeholder }) {
   const [imageBase64, setImageBase64] = useState(null);
 
   useEffect(() => {
-    console.log(image);
+    //console.log(image);
 
     if (!image) {
       setImageBase64(null);
@@ -19,11 +19,11 @@ export default function ItemImage({ image, placeholder }) {
       setImageBase64(imageString);
       return;
     }
-    console.log("Hej");
+    // console.log("Hej");
     const reader = new FileReader();
     reader.addEventListener("loadend", () => {
       setImageBase64(reader.result);
-      console.log(reader.result);
+      // console.log(reader.result);
     });
     reader.readAsDataURL(image);
   }, [image]);

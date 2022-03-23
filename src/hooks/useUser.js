@@ -26,7 +26,7 @@ export function UserProvider({ children }) {
 
   const loginWithProvider = useCallback((provider) => {
     signInWithPopup(auth, provider).then((credentials) => {
-      console.log(credentials);
+      //console.log(credentials);
     });
   }, []);
 
@@ -76,14 +76,14 @@ export function UserProvider({ children }) {
         setToken("");
         return;
       }
-      console.log(credentials);
+      //console.log(credentials);
       setToken(credentials.accessToken);
     });
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/items/user", {
+      .get(`${process.env.REACT_APP_API_LINK}/items/user`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {

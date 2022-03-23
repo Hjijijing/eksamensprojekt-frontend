@@ -27,7 +27,7 @@ export function ItemsProvider({ children }) {
 
   const refreshItems = useCallback(() => {
     axios
-      .get("http://localhost:5000/items", {
+      .get(`${process.env.REACT_APP_API_LINK}/items`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
@@ -40,13 +40,13 @@ export function ItemsProvider({ children }) {
 
   useEffect(() => {
     refreshItems();
-    console.log("HEA");
+    //console.log("HEA");
   }, [token, refreshItems]);
 
   const createItem = useCallback(
     (formData) => {
       return axios
-        .post("http://localhost:5000/items", formData, {
+        .post(`${process.env.REACT_APP_API_LINK}/items`, formData, {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
@@ -61,7 +61,7 @@ export function ItemsProvider({ children }) {
   const updateItem = useCallback(
     (id, formData) => {
       return axios
-        .put(`http://localhost:5000/items/${id}`, formData, {
+        .put(`${process.env.REACT_APP_API_LINK}/items/${id}`, formData, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {
@@ -76,7 +76,7 @@ export function ItemsProvider({ children }) {
   const deleteItem = useCallback(
     (id, formData) => {
       return axios
-        .delete(`http://localhost:5000/items/${id}`, {
+        .delete(`${process.env.REACT_APP_API_LINK}/items/${id}`, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {
@@ -88,7 +88,7 @@ export function ItemsProvider({ children }) {
     [token, refreshItems]
   );
 
-  console.log(items);
+  //console.log(items);
 
   const result = {
     items,
