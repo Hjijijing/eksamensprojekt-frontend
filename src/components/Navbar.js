@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import useAlert from "../hooks/useAlert";
 import { FaSignOutAlt } from "react-icons/fa";
 import { getAuth } from "firebase/auth";
 const auth = getAuth();

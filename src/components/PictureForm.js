@@ -15,6 +15,10 @@ const handleDragOver = (e) => {
   e.stopPropagation();
 };
 
+const videoConstraints = {
+  facingMode: "environment",
+};
+
 export default function PictureForm({ width, image, setImage }) {
   const webcamRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -74,7 +78,9 @@ export default function PictureForm({ width, image, setImage }) {
       onDragLeave={handleDragLeave}
       onDragEnter={handleDragEnter}
     >
-      {cameraEnabled && <Webcam ref={webcamRef} />}
+      {cameraEnabled && (
+        <Webcam ref={webcamRef} videoConstraints={videoConstraints} />
+      )}
       {!cameraEnabled && (
         <div className="pictureform-image">
           <ItemImage image={image} placeholder={true} />

@@ -16,6 +16,7 @@ import {
   EmailAuthProvider,
   updatePassword,
 } from "firebase/auth";
+import useAlert from "./useAlert";
 const auth = getAuth();
 
 const UserContext = React.createContext();
@@ -27,20 +28,36 @@ export default function useUser() {
 export function UserProvider({ children }) {
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+  const { handleError } = useAlert();
 
-  const loginWithProvider = useCallback((provider) => {
-    signInWithPopup(auth, provider).then((credentials) => {
-      //console.log(credentials);
-    });
-  }, []);
+  const loginWithProvider = useCallback(
+    (provider) => {
+      signInWithPopup(auth, provider)
+        .then((credentials) => {
+          //console.log(credentials);
+        })
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
-  const changeUserPassword = useCallback((newPassword) => {
-    updatePassword(auth.currentUser, newPassword).then((result) => {});
-  }, []);
+  const changeUserPassword = useCallback(
+    (newPassword) => {
+      updatePassword(auth.currentUser, newPassword)
+        .then((result) => {})
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
-  const linkProvider = useCallback((provider) => {
-    linkWithPopup(auth.currentUser, provider).then((result) => {});
-  }, []);
+  const linkProvider = useCallback(
+    (provider) => {
+      linkWithPopup(auth.currentUser, provider)
+        .then((result) => {})
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
   const loginWithGoogle = useCallback(() => {
     loginWithProvider(GoogleProvider);
@@ -58,13 +75,23 @@ export function UserProvider({ children }) {
     loginWithProvider(GithubProvider);
   }, [loginWithProvider]);
 
-  const loginWithEmail = useCallback((email, password) => {
-    signInWithEmailAndPassword(auth, email, password).then(() => {});
-  }, []);
+  const loginWithEmail = useCallback(
+    (email, password) => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {})
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
-  const createEmailAccount = useCallback((email, password) => {
-    createUserWithEmailAndPassword(auth, email, password).then((cred) => {});
-  }, []);
+  const createEmailAccount = useCallback(
+    (email, password) => {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((cred) => {})
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
   const linkWithGoogle = useCallback(() => {
     linkProvider(GoogleProvider);
@@ -78,17 +105,25 @@ export function UserProvider({ children }) {
   const linkWithGithub = useCallback(() => {
     linkProvider(GithubProvider);
   }, [linkProvider]);
-  const linkWithEmail = useCallback((email, password) => {
-    const credential = EmailAuthProvider.credential(email, password);
-    linkWithCredential(auth.currentUser, credential).then(() => {});
-  }, []);
+  const linkWithEmail = useCallback(
+    (email, password) => {
+      const credential = EmailAuthProvider.credential(email, password);
+      linkWithCredential(auth.currentUser, credential)
+        .then(() => {})
+        .catch(handleError);
+    },
+    [handleError]
+  );
 
   const logOut = useCallback(() => {
-    auth.signOut().then(() => {
-      setUserInfo(null);
-      setToken("");
-    });
-  }, []);
+    auth
+      .signOut()
+      .then(() => {
+        setUserInfo(null);
+        setToken("");
+      })
+      .catch(handleError);
+  }, [handleError]);
 
   useEffect(() => {
     return auth.onAuthStateChanged((credentials) => {

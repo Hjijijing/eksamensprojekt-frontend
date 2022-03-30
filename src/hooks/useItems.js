@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
+import useAlert from "./useAlert";
 import axios from "axios";
 import useUser from "./useUser";
 
@@ -10,7 +11,7 @@ export default function useItems() {
 
 export function ItemsProvider({ children }) {
   const [items, setItems] = useState([]);
-
+  const { success, error } = useAlert();
   const { token } = useUser();
 
   function getItemById(id) {
@@ -51,11 +52,14 @@ export function ItemsProvider({ children }) {
         })
         .then((res) => {
           refreshItems();
-          alert("Item created");
+          success("Item Created");
           return true;
+        })
+        .catch((err) => {
+          error("There was an error creating the item");
         });
     },
-    [token, refreshItems]
+    [token, refreshItems, success, error]
   );
 
   const updateItem = useCallback(
@@ -66,11 +70,14 @@ export function ItemsProvider({ children }) {
         })
         .then(() => {
           refreshItems();
-          alert("Item updated");
+          success("Item Updated");
           return true;
+        })
+        .catch((err) => {
+          error("There was an error updating the item");
         });
     },
-    [token, refreshItems]
+    [token, refreshItems, success, error]
   );
 
   const deleteItem = useCallback(
@@ -81,11 +88,14 @@ export function ItemsProvider({ children }) {
         })
         .then(() => {
           refreshItems();
-          alert("item deleted");
+          success("Item Deleted");
           return true;
+        })
+        .catch((err) => {
+          error("There was an error deleting the item");
         });
     },
-    [token, refreshItems]
+    [token, refreshItems, success, error]
   );
 
   //console.log(items);

@@ -559,24 +559,60 @@ button {
   border-color: lightcoral;
 }
 
+@keyframes alertBoxSlideInFromTop {
+  0% {
+    transform: translate(-50%, -300%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes alertBoxCollapse {
+  0% {
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0, 0);
+  }
+}
+
 .alertbox {
-  transform: translateX(50%);
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  min-width: 300px;
+  min-height: 60px;
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 5px;
+  animation: 0.2s ease-out 0s 1 alertBoxSlideInFromTop,
+    0.2s ease-out 5s 1 alertBoxCollapse;
+  animation-fill-mode: forwards;
 }
 
 .alert-level-error {
   background-color: lightcoral;
+  border: 3px solid crimson;
+  color: black;
 }
 
 .alert-level-warning {
-  background-color: yellow;
+  background-color: gold;
+  border: 3px solid GoldenRod;
+  color: black;
 }
 
 .alert-level-info {
-  background-color: #1976d2;
+  background-color: DeepSkyBlue;
+  border: 3px solid #1976d2;
+  color: black;
 }
 
 .alert-level-success {
   background-color: lightgreen;
+  border: 3px solid forestgreen;
+  color: forestgreen;
 }
 
 /*

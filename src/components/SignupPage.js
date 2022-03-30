@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAlert from "../hooks/useAlert";
 import useUser from "../hooks/useUser";
 import PasswordBox from "./PasswordBox";
 
@@ -8,12 +9,16 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { createEmailAccount } = useUser();
+  const { error } = useAlert();
 
   const navigate = useNavigate();
 
   function submitHandler(e) {
     e.preventDefault();
-    if (!(password === confirmPassword)) return;
+    if (!(password === confirmPassword)) {
+      error("Passwords don't match");
+      return;
+    }
     createEmailAccount(email, password);
   }
 

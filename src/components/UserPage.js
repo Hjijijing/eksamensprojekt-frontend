@@ -6,6 +6,7 @@ import FacebookButton from "./FacebookButton";
 import GithubButton from "./GithubButton";
 import useUser from "../hooks/useUser";
 import PasswordBox from "./PasswordBox";
+import useAlert from "../hooks/useAlert";
 
 const auth = getAuth();
 
@@ -28,16 +29,20 @@ export default function UserPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { error } = useAlert();
+
   const submitNewPassword = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) return;
+    if (password !== confirmPassword) {
+      error("Passwords don't match");
+      return;
+    }
     if (hasPassword) changeUserPassword(password);
     else linkWithEmail(auth.currentUser.email, password);
   };
 
   useEffect(() => {
     return auth.onAuthStateChanged((cred) => {
-      console.log(cred);
       auth.currentUser.providerData.forEach((provider) => {
         switch (provider.providerId) {
           case "google.com":

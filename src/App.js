@@ -10,11 +10,13 @@ import "./styles/styles.css";
 function App() {
   return (
     <Router>
-      <UserProvider>
-        <ItemsProvider>
-          <MainContent />
-        </ItemsProvider>
-      </UserProvider>
+      <AlertProvider>
+        <UserProvider>
+          <ItemsProvider>
+            <MainContent />
+          </ItemsProvider>
+        </UserProvider>
+      </AlertProvider>
     </Router>
   );
 }

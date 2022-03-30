@@ -5,6 +5,7 @@ import TableItemList from "./TableItemList";
 import ItemSelect from "./ItemSelect";
 import PillSelector from "./PillSelector";
 import ItemList from "./ItemList";
+import useAlert from "../hooks/useAlert";
 
 export default function ItemForm({
   submitHandler,
@@ -19,9 +20,14 @@ export default function ItemForm({
   const [storedIn, setStoredIn] = useState(item.storedIn ?? "None");
   const [image, setImage] = useState(item.image ?? null);
   const items = useItems();
+  const { warning } = useAlert();
 
   function onSubmit(e) {
     e.preventDefault();
+    if (itemName === "") {
+      warning("Item must have a name!");
+      return;
+    }
     if (enabled)
       submitHandler({
         image: image,
