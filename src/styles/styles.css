@@ -59,10 +59,10 @@ body {
   height: 100%;
 }
 
-.header-user svg:hover,
+/* .header-user svg:hover,
 .header-user p:hover {
   opacity: 0.8;
-}
+} */
 
 .navbar {
   display: flex;
@@ -423,6 +423,8 @@ textarea {
   .parent {
     padding-left: 20px;
     padding-right: 20px;
+    /* padding-bottom: 60px;*/
+    margin-bottom: 60px;
   }
 
   .navbar {
@@ -477,10 +479,16 @@ textarea {
 }
 
 #loginform input,
-button,
+#loginform button,
 #signupform input,
-button {
+#signupform button {
   flex: 0 1 50px;
+}
+
+#loginform button,
+#signupform button {
+  background-color: #1976d2;
+  color: white;
 }
 
 #loginform p,
@@ -613,6 +621,14 @@ button {
   background-color: lightgreen;
   border: 3px solid forestgreen;
   color: forestgreen;
+}
+
+.buttonrise {
+  transition: transform 0.15s ease-out;
+}
+
+.buttonrise:hover {
+  transform: translateY(-3%);
 }
 
 /*

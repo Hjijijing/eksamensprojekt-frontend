@@ -8,5 +8,5 @@ export default function Redirector({ to }) {
     navigate(to);
   }, [navigate, to]);
 
-  return <></>;
+  return null;
 }

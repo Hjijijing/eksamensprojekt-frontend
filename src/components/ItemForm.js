@@ -99,7 +99,7 @@ export default function ItemForm({
           name="submit"
           value="Submit"
           id="item-form-submit"
-          className="card"
+          className="card buttonrise"
         >
           {labels ? labels.submit : "Add"}
         </button>
@@ -108,7 +108,7 @@ export default function ItemForm({
           form="item-form"
           name="cancel"
           id="item-form-cancel"
-          className="card"
+          className="card buttonrise"
           onClick={cancelHandler}
         >
           {labels ? labels.cancel : "Cancel"}

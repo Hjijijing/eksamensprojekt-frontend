@@ -12,7 +12,7 @@ export default function PillSelector({ options, value, onChange }) {
         return (
           <button
             className={
-              "card pill-selector-button" +
+              "card pill-selector-button buttonrise" +
               (option.value === value ? " selected-pill" : "")
             }
             key={option.value}

@@ -40,7 +40,12 @@ export default function SignupPage() {
           confirmPassword={confirmPassword}
           setConfirmPassword={setConfirmPassword}
         />
-        <button type="submit" form="signupform" name="login" className="card">
+        <button
+          type="submit"
+          form="signupform"
+          name="login"
+          className="card buttonrise"
+        >
           Sign Up
         </button>
         <p onClick={() => navigate("/login")}>

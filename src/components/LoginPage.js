@@ -45,7 +45,12 @@ export default function LoginPage() {
           className="card"
           required
         />
-        <button type="submit" form="loginform" name="login" className="card">
+        <button
+          type="submit"
+          form="loginform"
+          name="login"
+          className="card buttonrise"
+        >
           Login
         </button>
         <p onClick={() => navigate("/signup")}>

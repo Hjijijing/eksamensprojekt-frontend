@@ -21,6 +21,7 @@ export default function Navbar() {
       {auth.currentUser && (
         <div className="header-user">
           <p
+            className="buttonrise"
             onClick={() => {
               navigate("/account");
             }}
@@ -29,6 +30,7 @@ export default function Navbar() {
           </p>
           <FaSignOutAlt
             size="1.5em"
+            className="buttonrise"
             onClick={() => {
               navigate("/login");
               logOut();

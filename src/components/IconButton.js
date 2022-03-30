@@ -5,7 +5,7 @@ export default function IconButton({ bg, col, icon, text, clickHandler }) {
     <button
       type="button"
       onClick={clickHandler}
-      className="iconbutton card"
+      className="iconbutton card buttonrise"
       style={{ backgroundColor: bg, color: col }}
     >
       {icon}

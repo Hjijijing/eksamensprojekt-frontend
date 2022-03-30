@@ -71,13 +71,13 @@ export default function UserPage() {
     <div className="card account">
       <div id="credentials">
         <p id="email">Email: {auth.currentUser.email}</p>
-        {hasPassword && <p id="password">Password: ******</p>}
+        {hasPassword && <p id="password">Password: ••••••••••••</p>}
         <form id="passwordchange" onSubmit={submitNewPassword}>
           <PasswordBox
             {...{ password, confirmPassword, setPassword, setConfirmPassword }}
           />
           <input
-            className="card"
+            className="card buttonrise"
             type="submit"
             id="submitpassword"
             value="Change Password"

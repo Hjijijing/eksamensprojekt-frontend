@@ -88,17 +88,25 @@ export default function PictureForm({ width, image, setImage }) {
       )}
       <div className="pictureform-options">
         {cameraEnabled && (
-          <button className="card" type="button" onClick={takePicture}>
+          <button
+            className="card buttonrise"
+            type="button"
+            onClick={takePicture}
+          >
             Take Picture
           </button>
         )}
         {!cameraEnabled && (
-          <button className="card" type="button" onClick={openFileInput}>
+          <button
+            className="card buttonrise"
+            type="button"
+            onClick={openFileInput}
+          >
             {uploadName ?? "Upload Image"}
           </button>
         )}
         <button
-          className="card"
+          className="card buttonrise"
           type="button"
           onClick={() => {
             setCameraEnabled((enabled) => !enabled);
