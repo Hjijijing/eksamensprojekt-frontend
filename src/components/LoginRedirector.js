@@ -6,7 +6,7 @@ export default function Redirector({ to }) {
 
   useEffect(() => {
     navigate(to);
-  }, []);
+  }, [navigate, to]);
 
   return <></>;
 }

@@ -5,20 +5,39 @@ import TwitterButton from "./TwitterButton";
 import FacebookButton from "./FacebookButton";
 import GithubButton from "./GithubButton";
 import useUser from "../hooks/useUser";
+import PasswordBox from "./PasswordBox";
 
 const auth = getAuth();
 
 export default function UserPage() {
-  const { linkWithGoogle, linkWithTwitter, linkWithFacebook, linkWithGithub } =
-    useUser();
+  const {
+    linkWithGoogle,
+    linkWithTwitter,
+    linkWithFacebook,
+    linkWithGithub,
+    linkWithEmail,
+    changeUserPassword,
+  } = useUser();
 
   const [google, setGoogle] = useState(false);
   const [twitter, setTwitter] = useState(false);
   const [facebook, setFacebook] = useState(false);
   const [github, setGithub] = useState(false);
+  const [hasPassword, setHasPassword] = useState(false);
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const submitNewPassword = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) return;
+    if (hasPassword) changeUserPassword(password);
+    else linkWithEmail(auth.currentUser.email, password);
+  };
 
   useEffect(() => {
     return auth.onAuthStateChanged((cred) => {
+      console.log(cred);
       auth.currentUser.providerData.forEach((provider) => {
         switch (provider.providerId) {
           case "google.com":
@@ -33,6 +52,9 @@ export default function UserPage() {
           case "github.com":
             setGithub(true);
             break;
+          case "password":
+            setHasPassword(true);
+            break;
           default:
             break;
         }
@@ -42,7 +64,21 @@ export default function UserPage() {
 
   return (
     <div className="card account">
-      <p id="email">Email: {auth.currentUser.email}</p>
+      <div id="credentials">
+        <p id="email">Email: {auth.currentUser.email}</p>
+        {hasPassword && <p id="password">Password: ******</p>}
+        <form id="passwordchange" onSubmit={submitNewPassword}>
+          <PasswordBox
+            {...{ password, confirmPassword, setPassword, setConfirmPassword }}
+          />
+          <input
+            className="card"
+            type="submit"
+            id="submitpassword"
+            value="Change Password"
+          />
+        </form>
+      </div>
       <GoogleButton
         text={google ? "Linked" : "Connect to Google"}
         clickHandler={google ? null : linkWithGoogle}

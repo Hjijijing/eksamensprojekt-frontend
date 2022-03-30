@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
-import axios from "axios";
 import { FaSignOutAlt } from "react-icons/fa";
-import { VscAccount } from "react-icons/vsc";
-
-import provider from "../firebase/firebaseAuth";
 import { getAuth } from "firebase/auth";
 const auth = getAuth();
 
@@ -13,7 +9,7 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { userInfo, logOut, loginWithGoogle } = useUser();
+  const { userInfo, logOut } = useUser();
 
   let displayName = "";
   if (userInfo && userInfo.userName) displayName = userInfo.userName;

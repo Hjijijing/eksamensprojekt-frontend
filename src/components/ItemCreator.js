@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ItemForm from "./ItemForm";
-import axios from "axios";
 import useItems from "../hooks/useItems";
 import { useNavigate } from "react-router-dom";
 

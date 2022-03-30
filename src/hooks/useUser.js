@@ -9,12 +9,12 @@ import {
 import {
   getAuth,
   signInWithPopup,
-  signOut,
   linkWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   linkWithCredential,
   EmailAuthProvider,
+  updatePassword,
 } from "firebase/auth";
 const auth = getAuth();
 
@@ -32,6 +32,10 @@ export function UserProvider({ children }) {
     signInWithPopup(auth, provider).then((credentials) => {
       //console.log(credentials);
     });
+  }, []);
+
+  const changeUserPassword = useCallback((newPassword) => {
+    updatePassword(auth.currentUser, newPassword).then((result) => {});
   }, []);
 
   const linkProvider = useCallback((provider) => {
@@ -120,6 +124,7 @@ export function UserProvider({ children }) {
     linkWithGithub,
     linkWithEmail,
     createEmailAccount,
+    changeUserPassword,
     logOut,
     userInfo,
   };

@@ -500,9 +500,24 @@ button {
   padding: 10px;
 }
 
-.account #email {
+.account #credentials {
   border-bottom: 1px solid lightgray;
   padding-bottom: 10px;
+}
+
+.account #passwordchange {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.account #passwordchange > * {
+  padding: 10px;
+}
+
+.account #submitpassword {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px;
 }
 
 .account {
@@ -527,7 +542,7 @@ button {
   margin-bottom: 50vh;
 }
 
-#signupform .nomatch {
+.nomatch {
   color: lightcoral;
   border-color: lightcoral;
 }

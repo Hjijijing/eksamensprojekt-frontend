@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import PasswordBox from "./PasswordBox";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -28,23 +29,11 @@ export default function SignupPage() {
           className="card"
           required
         />
-        <input
-          value={password}
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          className="card"
-          required
-        />
-        <input
-          value={confirmPassword}
-          type="password"
-          name="confirmpassword"
-          placeholder="Confirm Password"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className={"card" + (password === confirmPassword ? "" : " nomatch")}
-          required
+        <PasswordBox
+          password={password}
+          setPassword={setPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
         />
         <button type="submit" form="signupform" name="login" className="card">
           Sign Up
