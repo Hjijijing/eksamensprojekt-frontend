@@ -558,6 +558,27 @@ button {
   color: lightcoral;
   border-color: lightcoral;
 }
+
+.alertbox {
+  transform: translateX(50%);
+}
+
+.alert-level-error {
+  background-color: lightcoral;
+}
+
+.alert-level-warning {
+  background-color: yellow;
+}
+
+.alert-level-info {
+  background-color: #1976d2;
+}
+
+.alert-level-success {
+  background-color: lightgreen;
+}
+
 /*
 .itemlist-list {
   flex-grow: 1;
