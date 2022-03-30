@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TableItemListItem from "./TableItemListItem";
 import useItems from "../hooks/useItems";
-import "../styles/itemlist.css";
 import Searchbar from "./Searchbar";
 import ItemSelect from "./ItemSelect";
 import useBulkActions from "../hooks/useBulkActions";

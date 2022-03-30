@@ -17,27 +17,25 @@ export default function Navbar() {
     displayName = auth.currentUser.email;
   return (
     <div className="header">
-      <div className="header-user">
-        {userInfo && (
-          <>
-            <p
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              {displayName}
-            </p>
-            <FaSignOutAlt
-              size="1.5em"
-              onClick={() => {
-                navigate("/login");
-                logOut();
-              }}
-              alt="Sign Out"
-            />
-          </>
-        )}
-      </div>
+      {auth.currentUser && (
+        <div className="header-user">
+          <p
+            onClick={() => {
+              navigate("/account");
+            }}
+          >
+            {displayName}
+          </p>
+          <FaSignOutAlt
+            size="1.5em"
+            onClick={() => {
+              navigate("/login");
+              logOut();
+            }}
+            alt="Sign Out"
+          />
+        </div>
+      )}
       <div className="navbar">
         <button
           className={
