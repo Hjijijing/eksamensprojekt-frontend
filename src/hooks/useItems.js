@@ -5,6 +5,38 @@ import useUser from "./useUser";
 
 const ItemsContext = React.createContext();
 
+export const sortByIsStoredIn =
+  (reverse = false) =>
+  (a, b) => {
+    if (a.storedIn && !b.storedIn) return -1 * (reverse ? -1 : 1);
+    else if (!a.storedIn && b.storedIn) return 1 * (reverse ? -1 : 1);
+    else return 0;
+  };
+
+export const sortByDate =
+  (reverse = false) =>
+  (a, b) => {
+    return (new Date(a.createdAt) - new Date(b.createdAt)) * (reverse ? -1 : 1);
+  };
+
+export const sortByIsContainer =
+  (reverse = false) =>
+  (a, b) => {
+    if (a.isContainer && !b.isContainer) return -1 * (reverse ? -1 : 1);
+    else if (!a.isContainer && b.isContainer) return 1 * (reverse ? -1 : 1);
+    else return 0;
+  };
+
+export const sortByName =
+  (reverse = false) =>
+  (a, b) => {
+    if (a.itemName.toUpperCase() < b.itemName.toUpperCase())
+      return -1 * (reverse ? -1 : 1);
+    else if (a.itemName.toUpperCase > b.itemName.toUpperCase())
+      return 1 * (reverse ? -1 : 1);
+    else return 0;
+  };
+
 export default function useItems() {
   return useContext(ItemsContext);
 }
@@ -98,6 +130,26 @@ export function ItemsProvider({ children }) {
     [token, refreshItems, success, error]
   );
 
+  const getSortedItems = useCallback(
+    (filters = [sortByIsStoredIn(true), sortByDate()]) => {
+      const sorted = [...items];
+
+      if (typeof filters === "function") sorted.sort(filters);
+      else if (Array.isArray(filters))
+        sorted.sort((a, b) => {
+          for (let i = 0; i < filters.length; i++) {
+            const result = filters[i](a, b);
+            if (result !== 0 || i === filters.length - 1) return result;
+          }
+          return 0;
+        });
+      else sorted.sort();
+
+      return sorted;
+    },
+    [items]
+  );
+
   //console.log(items);
 
   const result = {
@@ -109,6 +161,7 @@ export function ItemsProvider({ children }) {
     createItem,
     updateItem,
     deleteItem,
+    getSortedItems,
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useItems from "../../hooks/useItems";
+import useItems, { sortByDate, sortByName } from "../../hooks/useItems";
 import PictureItemList from "./PictureList/PictureItemList";
 import PillSelector from "../Generic/PillSelector";
 import Searchbar from "./Searchbar";
@@ -12,10 +12,13 @@ export default function ItemList({
   bulkactions = false,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [useTableMode, setUseTableMode] = useState(tableMode);
-  const items = useItems();
+  const [useTableMode, setUseTableMode] = useState(
+    JSON.parse(localStorage.getItem("tablemode")) ?? tableMode
+  );
+  const { getSortedItems } = useItems();
+  const items = getSortedItems();
 
-  const itemsToShow = items.items.filter((item) => {
+  const itemsToShow = items.filter((item) => {
     if (!filter || filter(item))
       return item.itemName.toLowerCase().includes(searchTerm.toLowerCase());
     return false;
@@ -31,7 +34,10 @@ export default function ItemList({
             { value: true, label: "Table" },
           ]}
           value={useTableMode}
-          onChange={setUseTableMode}
+          onChange={(v) => {
+            setUseTableMode(v);
+            localStorage.setItem("tablemode", v);
+          }}
         />
       )}
       {useTableMode ? (
