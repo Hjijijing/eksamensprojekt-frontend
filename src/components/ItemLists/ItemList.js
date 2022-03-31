@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useItems, { sortByDate, sortByName } from "../../hooks/useItems";
+import useItems from "../../hooks/useItems";
 import PictureItemList from "./PictureList/PictureItemList";
 import PillSelector from "../Generic/PillSelector";
 import Searchbar from "./Searchbar";
