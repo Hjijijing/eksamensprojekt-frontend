@@ -30,7 +30,7 @@ export function UserProvider({ children }) {
     localStorage.getItem("firebaseToken") ?? ""
   );
   const [userInfo, setUserInfo] = useState(null);
-  const { handleError } = useAlert();
+  const { handleError, info, success } = useAlert();
 
   const loginWithProvider = useCallback(
     (provider) => {
@@ -43,20 +43,26 @@ export function UserProvider({ children }) {
 
   const changeUserPassword = useCallback(
     (newPassword) => {
+      info("Changing Password");
       updatePassword(auth.currentUser, newPassword)
-        .then((result) => {})
+        .then((result) => {
+          success("Password changed");
+        })
         .catch(handleError);
     },
-    [handleError]
+    [handleError, info, success]
   );
 
   const linkProvider = useCallback(
     (provider) => {
+      info("Linking provider");
       linkWithPopup(auth.currentUser, provider)
-        .then((result) => {})
+        .then((result) => {
+          success("Provider linked");
+        })
         .catch(handleError);
     },
-    [handleError]
+    [handleError, info, success]
   );
 
   const loginWithGoogle = useCallback(() => {
@@ -107,12 +113,15 @@ export function UserProvider({ children }) {
   }, [linkProvider]);
   const linkWithEmail = useCallback(
     (email, password) => {
+      info("Adding password");
       const credential = EmailAuthProvider.credential(email, password);
       linkWithCredential(auth.currentUser, credential)
-        .then(() => {})
+        .then(() => {
+          success("Password added");
+        })
         .catch(handleError);
     },
-    [handleError]
+    [handleError, info, success]
   );
 
   const logOut = useCallback(() => {
