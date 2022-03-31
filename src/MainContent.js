@@ -18,12 +18,10 @@ export default function MainContent() {
       <Navbar />
       <div className="parent">
         <Routes>
-          {/* <Route path="/" element={<ItemList />} /> */}
-          {/* <Route path="/" element={<PictureItemList />} /> */}
-          {}
           {token !== "" ? (
             <>
               <Route
+                exact
                 path="/"
                 element={
                   <ItemList
@@ -36,15 +34,19 @@ export default function MainContent() {
               <Route path="/create" element={<ItemCreator />} />
               <Route path="/edit/:id" element={<ItemEditor />} />
               <Route path="/account" element={<UserPage />} />
-              <Route path="/*" element={<Redirector to="/" />} />
             </>
           ) : (
             <>
               <Route path="/login" element={<LoginPage></LoginPage>} />
               <Route path="/signup" element={<SignupPage></SignupPage>} />
-              <Route path="/*" element={<Redirector to="/login" />} />
             </>
           )}
+          <Route
+            path="*"
+            element={
+              token === "" ? <Redirector to="/login" /> : <Redirector to="/" />
+            }
+          />
         </Routes>
       </div>
     </div>

@@ -352,18 +352,20 @@ textarea {
   line-height: 10px;
 }
 
-.picture-itemlist-item #itemimage {
+.itemimage {
   flex: 1 0 0;
   height: 100%;
   width: 100%;
+  overflow:hidden;
   /* background-color: blue; */
 }
 
-.picture-itemlist-item img {
+.itemimage img{
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 
 .picture-itemlist-item .iteminfo {
   width: 100%;

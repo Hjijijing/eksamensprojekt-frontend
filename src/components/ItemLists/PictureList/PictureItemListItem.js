@@ -22,9 +22,8 @@ export default function PictureItemListItem({ item }) {
           </>
         )}
       </div>
-      <div id="itemimage">
-        <ItemImage image={item.image} />
-      </div>
+
+      <ItemImage image={item.image} />
     </div>
   );
 }

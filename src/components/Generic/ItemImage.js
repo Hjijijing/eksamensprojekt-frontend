@@ -1,8 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 const Buffer = require("buffer/").Buffer;
 
 export default function ItemImage({ image, placeholder }) {
   const [imageBase64, setImageBase64] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const containerRef = useRef();
+
+  const intersectHandler = ([{ isIntersecting }], observer) => {
+    setVisible(isIntersecting);
+  };
+
+  useIntersectionObserver({
+    target: containerRef,
+    intersectHandler,
+    threshold: 0,
+    rootMargin: "200px",
+  });
 
   useEffect(() => {
     //console.log(image);
@@ -28,14 +42,16 @@ export default function ItemImage({ image, placeholder }) {
     reader.readAsDataURL(image);
   }, [image]);
 
-  if (imageBase64)
-    return <img src={imageBase64} alt="item" className="itemimage" />;
-  else if (placeholder)
-    return (
-      <img
-        src="https://via.placeholder.com/512/FFFFFF/000000?text=No+Image"
-        alt="placeholder"
-      ></img>
-    );
-  else return <></>;
+  return (
+    <div className="itemimage" ref={containerRef}>
+      {visible &&
+        ((imageBase64 && <img src={imageBase64} alt="item" />) ||
+          (placeholder && (
+            <img
+              src="https://via.placeholder.com/512/FFFFFF/000000?text=No+Image"
+              alt="placeholder"
+            ></img>
+          )))}
+    </div>
+  );
 }
