@@ -14,6 +14,7 @@ export default function PictureItemListItem({ item }) {
           <p id="itemName">{item.itemName}</p>
         </ItemLink>
         <p id="description">{item.description}</p>
+        <p>{new Date(item.createdAt).toLocaleDateString("en-gb")}</p>
         {storedIn && (
           <>
             {"Stored In: "}

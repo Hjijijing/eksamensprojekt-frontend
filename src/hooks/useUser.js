@@ -26,16 +26,16 @@ export default function useUser() {
 }
 
 export function UserProvider({ children }) {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    localStorage.getItem("firebaseToken") ?? ""
+  );
   const [userInfo, setUserInfo] = useState(null);
   const { handleError } = useAlert();
 
   const loginWithProvider = useCallback(
     (provider) => {
       signInWithPopup(auth, provider)
-        .then((credentials) => {
-          //console.log(credentials);
-        })
+        .then((credentials) => {})
         .catch(handleError);
     },
     [handleError]
@@ -129,10 +129,12 @@ export function UserProvider({ children }) {
     return auth.onAuthStateChanged((credentials) => {
       if (!credentials) {
         setToken("");
+        localStorage.removeItem("firebaseToken");
         return;
       }
       //console.log(credentials);
       setToken(credentials.accessToken);
+      localStorage.setItem("firebaseToken", credentials.accessToken);
     });
   }, []);
 
@@ -142,7 +144,7 @@ export function UserProvider({ children }) {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
-        setUserInfo(res.data);
+        setUserInfo({ ...res.data });
       });
   }, [token]);
 
