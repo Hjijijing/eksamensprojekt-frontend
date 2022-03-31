@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import useItems from "../hooks/useItems";
-import PictureItemList from "./PictureItemList";
-import PillSelector from "./PillSelector";
+import useItems from "../../hooks/useItems";
+import PictureItemList from "./PictureList/PictureItemList";
+import PillSelector from "../Generic/PillSelector";
 import Searchbar from "./Searchbar";
-import TableItemList from "./TableItemList";
+import TableItemList from "./TableList/TableItemList";
 
 export default function ItemList({
   filter,

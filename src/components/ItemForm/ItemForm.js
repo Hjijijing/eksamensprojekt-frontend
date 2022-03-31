@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import useItems from "../hooks/useItems";
+import useItems from "../../hooks/useItems";
 import PictureForm from "./PictureForm";
-import TableItemList from "./TableItemList";
-import ItemSelect from "./ItemSelect";
-import PillSelector from "./PillSelector";
-import ItemList from "./ItemList";
-import useAlert from "../hooks/useAlert";
+import ItemSelect from "../Generic/ItemSelect";
+import PillSelector from "../Generic/PillSelector";
+import ItemList from "../ItemLists/ItemList";
+import useAlert from "../../hooks/useAlert";
 
 export default function ItemForm({
   submitHandler,

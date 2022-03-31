@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ItemForm from "./ItemForm";
-import useItems from "../hooks/useItems";
+import useItems from "../../hooks/useItems";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function ItemEditor() {

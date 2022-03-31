@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
-import ItemImage from "./ItemImage";
+import ItemImage from "../Generic/ItemImage";
 
 const handleDragEnter = (e) => {
   e.preventDefault();

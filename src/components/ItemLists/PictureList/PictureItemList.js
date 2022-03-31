@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useItems from "../hooks/useItems";
+import useItems from "../../../hooks/useItems";
 import PictureItemListItem from "./PictureItemListItem";
-import Searchbar from "./Searchbar";
+import Searchbar from "../Searchbar";
 
 export default function PictureItemList({ items }) {
   return (

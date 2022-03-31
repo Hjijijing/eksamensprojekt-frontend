@@ -1,15 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LoginRedirector from "./components/LoginRedirector";
-import Navbar from "./components/Navbar";
-import ItemList from "./components/ItemList";
-import ItemCreator from "./components/ItemCreator";
-import ItemEditor from "./components/ItemEditor";
+import Navbar from "./components/Navigation/Navbar";
+import ItemList from "./components/ItemLists/ItemList";
+import ItemCreator from "./components/ItemForm/ItemCreator";
+import ItemEditor from "./components/ItemForm/ItemEditor";
 import useUser from "./hooks/useUser";
-import Redirector from "./components/LoginRedirector";
-import LoginPage from "./components/LoginPage";
-import UserPage from "./components/UserPage";
-import SignupPage from "./components/SignupPage";
+import Redirector from "./components/Navigation/LoginRedirector";
+import LoginPage from "./components/Account/LoginPage";
+import UserPage from "./components/Account/UserPage";
+import SignupPage from "./components/Account/SignupPage";
 
 export default function MainContent() {
   const { token } = useUser();

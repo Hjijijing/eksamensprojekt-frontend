@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAlert from "../hooks/useAlert";
-import useUser from "../hooks/useUser";
+import useAlert from "../../hooks/useAlert";
+import useUser from "../../hooks/useUser";
 import PasswordBox from "./PasswordBox";
 
 export default function SignupPage() {

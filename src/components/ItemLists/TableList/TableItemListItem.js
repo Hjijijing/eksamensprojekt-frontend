@@ -1,7 +1,6 @@
 import React from "react";
-import useItems from "../hooks/useItems";
-import { Link } from "react-router-dom";
-import ItemLink from "./ItemLink";
+import useItems from "../../../hooks/useItems";
+import ItemLink from "../../Generic/ItemLink";
 
 export default function TableItemListItem({
   item,

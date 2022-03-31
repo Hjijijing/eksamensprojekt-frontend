@@ -1,7 +1,7 @@
 import React from "react";
-import useItems from "../hooks/useItems";
-import ItemImage from "./ItemImage";
-import ItemLink from "./ItemLink";
+import useItems from "../../../hooks/useItems";
+import ItemImage from "../../Generic/ItemImage";
+import ItemLink from "../../Generic/ItemLink";
 
 export default function PictureItemListItem({ item }) {
   const items = useItems();

@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import useItems from "../hooks/useItems";
+import useItems from "../../hooks/useItems";
 
 export default function ItemSelect({ filter, value, itemChanged }) {
   const items = useItems();

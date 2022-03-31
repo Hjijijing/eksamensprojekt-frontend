@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import TableItemListItem from "./TableItemListItem";
-import useItems from "../hooks/useItems";
-import Searchbar from "./Searchbar";
-import ItemSelect from "./ItemSelect";
-import useBulkActions from "../hooks/useBulkActions";
+import ItemSelect from "../../Generic/ItemSelect";
+import useBulkActions from "../../../hooks/useBulkActions";
 
 function toggleSelection(item) {
   return (arr) => {

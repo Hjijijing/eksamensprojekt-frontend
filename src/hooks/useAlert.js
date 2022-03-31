@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
-import axios from "axios";
-import AlertBox from "../components/AlertBox";
+import React, { useState, useCallback, useContext } from "react";
+import AlertBox from "../components/Generic/AlertBox";
 
 const AlertContext = React.createContext();
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import FacebookButton from "./FacebookButton";
-import GithubButton from "./GithubButton";
-import GoogleButton from "./GoogleButton";
-import TwitterButton from "./TwitterButton";
-import useUser from "../hooks/useUser";
+import FacebookButton from "../IconButtons/FacebookButton";
+import GithubButton from "../IconButtons/GithubButton";
+import GoogleButton from "../IconButtons/GoogleButton";
+import TwitterButton from "../IconButtons/TwitterButton";
+import useUser from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {

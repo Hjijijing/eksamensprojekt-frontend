@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
-import GoogleButton from "./GoogleButton";
-import TwitterButton from "./TwitterButton";
-import FacebookButton from "./FacebookButton";
-import GithubButton from "./GithubButton";
-import useUser from "../hooks/useUser";
+import GoogleButton from "../IconButtons/GoogleButton";
+import TwitterButton from "../IconButtons/TwitterButton";
+import FacebookButton from "../IconButtons/FacebookButton";
+import GithubButton from "../IconButtons/GithubButton";
+import useUser from "../../hooks/useUser";
 import PasswordBox from "./PasswordBox";
-import useAlert from "../hooks/useAlert";
+import useAlert from "../../hooks/useAlert";
 
 const auth = getAuth();
 
