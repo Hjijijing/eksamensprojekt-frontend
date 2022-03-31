@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TableItemListItem from "./TableItemListItem";
 import ItemSelect from "../../Generic/ItemSelect";
-import useBulkActions from "../../../hooks/useBulkActions";
+import useItems from "../../../hooks/useItems";
 
 function toggleSelection(item) {
   return (arr) => {
@@ -20,10 +20,9 @@ function toggleSelection(item) {
 export default function TableItemList({ items, bulkactions }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const { bulkMoveItems } = useItems();
 
   const [moveTo, setMoveTo] = useState(null);
-
-  const { bulkMoveTo } = useBulkActions();
 
   function selectItem(item) {
     const newSelection = toggleSelection(item)(selectedItems);
@@ -46,7 +45,7 @@ export default function TableItemList({ items, bulkactions }) {
           <button
             type="button"
             onClick={() => {
-              bulkMoveTo(selectAll ? items : selectedItems, moveTo);
+              bulkMoveItems(selectAll ? items : selectedItems, moveTo);
             }}
           >
             Bulk move items

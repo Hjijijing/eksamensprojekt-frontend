@@ -43,7 +43,7 @@ export default function useItems() {
 
 export function ItemsProvider({ children }) {
   const [items, setItems] = useState([]);
-  const { success, error } = useAlert();
+  const { success, error, info } = useAlert();
   const { token } = useUser();
 
   function getItemById(id) {
@@ -77,61 +77,66 @@ export function ItemsProvider({ children }) {
   }, [token, refreshItems]);
 
   const createItem = useCallback(
-    (formData) => {
+    (formData, { refresh = true, alert = true } = {}) => {
+      if (alert) info("Creating item");
       return axios
         .post(`${process.env.REACT_APP_API_LINK}/items`, formData, {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
-          refreshItems();
-          success("Item Created");
+          if (refresh) refreshItems();
+          if (alert) success("Item Created");
           return true;
         })
         .catch((err) => {
           error("There was an error creating the item");
         });
     },
-    [token, refreshItems, success, error]
+    [token, refreshItems, success, error, info]
   );
 
   const updateItem = useCallback(
-    (id, formData) => {
+    (id, formData, { refresh = true, alert = true } = {}) => {
+      if (alert) info("Updating item");
       return axios
         .put(`${process.env.REACT_APP_API_LINK}/items/${id}`, formData, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {
-          refreshItems();
-          success("Item Updated");
+          if (refresh) refreshItems();
+          if (alert) success("Item Updated");
           return true;
         })
         .catch((err) => {
           error("There was an error updating the item");
         });
     },
-    [token, refreshItems, success, error]
+    [token, refreshItems, success, error, info]
   );
 
   const deleteItem = useCallback(
-    (id, formData) => {
+    (id, formData, { refresh = true, alert = true } = {}) => {
+      if (alert) info("Deleting item");
       return axios
         .delete(`${process.env.REACT_APP_API_LINK}/items/${id}`, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {
-          refreshItems();
-          success("Item Deleted");
+          if (refresh) refreshItems();
+          if (alert) success("Item Deleted");
           return true;
         })
         .catch((err) => {
           error("There was an error deleting the item");
         });
     },
-    [token, refreshItems, success, error]
+    [token, refreshItems, success, error, info]
   );
 
   const getSortedItems = useCallback(
-    (filters = [sortByIsStoredIn(true), sortByDate()]) => {
+    (
+      filters = [sortByIsStoredIn(true), sortByIsContainer(true), sortByDate()]
+    ) => {
       const sorted = [...items];
 
       if (typeof filters === "function") sorted.sort(filters);
@@ -150,6 +155,33 @@ export function ItemsProvider({ children }) {
     [items]
   );
 
+  const bulkMoveItems = useCallback(
+    (itemsToMove, moveTo, { refresh = true, alert = true } = {}) => {
+      if (!itemsToMove) return;
+
+      const promises = [];
+
+      if (alert) info("Moving items");
+
+      itemsToMove.forEach((item) => {
+        const data = new FormData();
+        data.append(
+          "item",
+          JSON.stringify({ storedIn: moveTo === "None" ? null : moveTo })
+        );
+        promises.push(
+          updateItem(item._id, data, { refresh: false, alert: false })
+        );
+      });
+
+      return Promise.all(promises).then(() => {
+        if (alert) success("All items moved");
+        if (refresh) refreshItems();
+      });
+    },
+    [refreshItems, success, updateItem, info]
+  );
+
   //console.log(items);
 
   const result = {
@@ -162,6 +194,7 @@ export function ItemsProvider({ children }) {
     updateItem,
     deleteItem,
     getSortedItems,
+    bulkMoveItems,
   };
 
   return (
