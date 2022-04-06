@@ -33,26 +33,27 @@ export default function TableItemList({ items, bulkactions }) {
 
   return (
     <div className="itemlist-container">
-      {anyItemsSelected && (
-        <div className="bulk-moveto">
-          <ItemSelect
-            filter={(item) => item.isContainer}
-            value={moveTo}
-            itemChanged={(e) => {
-              setMoveTo(e.value);
-            }}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              bulkMoveItems(selectAll ? items : selectedItems, moveTo);
-            }}
-          >
-            Bulk move items
-          </button>
-        </div>
-      )}
-
+      <div className="table-actions">
+        {anyItemsSelected && (
+          <>
+            <ItemSelect
+              filter={(item) => item.isContainer}
+              value={moveTo}
+              itemChanged={(e) => {
+                setMoveTo(e.value);
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                bulkMoveItems(selectAll ? items : selectedItems, moveTo);
+              }}
+            >
+              Bulk move items
+            </button>
+          </>
+        )}
+      </div>
       <table className="itemlist-list card">
         <thead>
           <tr>

@@ -600,3 +600,7 @@ textarea {
 .buttonrise:hover {
   transform: translateY(-3%);
 }
+
+.table-actions {
+  height: 70px;
+}
