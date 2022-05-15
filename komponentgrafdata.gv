@@ -1,0 +1,110 @@
+strict digraph "dependency-cruiser output"{
+    ordering="out" rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    subgraph "cluster_src" {label="src" "src/App.js" [label=<App.js> tooltip="App.js" URL="src/App.js" ] }
+    "src/App.js" -> "src/ContextProviders.js"
+    "src/App.js" -> "src/firebase/firebaseConfig.js"
+    "src/App.js" -> "src/MainContent.js"
+    "src/App.js" -> "src/styles/styles.css"
+    subgraph "cluster_src" {label="src" "src/ContextProviders.js" [label=<ContextProviders.js> tooltip="ContextProviders.js" URL="src/ContextProviders.js" ] }
+    "src/ContextProviders.js" -> "src/hooks/useAlert.js"
+    "src/ContextProviders.js" -> "src/hooks/useItems.js"
+    "src/ContextProviders.js" -> "src/hooks/useUser.js"
+    subgraph "cluster_src" {label="src" "src/MainContent.js" [label=<MainContent.js> tooltip="MainContent.js" URL="src/MainContent.js" ] }
+    "src/MainContent.js" -> "src/components/Account/LoginPage.js"
+    "src/MainContent.js" -> "src/components/Account/SignupPage.js"
+    "src/MainContent.js" -> "src/components/Account/UserPage.js"
+    "src/MainContent.js" -> "src/components/ItemForm/ItemCreator.js"
+    "src/MainContent.js" -> "src/components/ItemForm/ItemEditor.js"
+    "src/MainContent.js" -> "src/components/ItemLists/ItemList.js"
+    "src/MainContent.js" -> "src/components/Navigation/LoginRedirector.js"
+    "src/MainContent.js" -> "src/components/Navigation/Navbar.js"
+    "src/MainContent.js" -> "src/hooks/useUser.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Account" {label="Account" "src/components/Account/LoginPage.js" [label=<LoginPage.js> tooltip="LoginPage.js" URL="src/components/Account/LoginPage.js" ] } } }
+    "src/components/Account/LoginPage.js" -> "src/hooks/useUser.js"
+    "src/components/Account/LoginPage.js" -> "src/components/IconButtons/GithubButton.js"
+    "src/components/Account/LoginPage.js" -> "src/components/IconButtons/GoogleButton.js"
+    "src/components/Account/LoginPage.js" -> "src/components/IconButtons/TwitterButton.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Account" {label="Account" "src/components/Account/PasswordBox.js" [label=<PasswordBox.js> tooltip="PasswordBox.js" URL="src/components/Account/PasswordBox.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Account" {label="Account" "src/components/Account/SignupPage.js" [label=<SignupPage.js> tooltip="SignupPage.js" URL="src/components/Account/SignupPage.js" ] } } }
+    "src/components/Account/SignupPage.js" -> "src/hooks/useAlert.js"
+    "src/components/Account/SignupPage.js" -> "src/hooks/useUser.js"
+    "src/components/Account/SignupPage.js" -> "src/components/Account/PasswordBox.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Account" {label="Account" "src/components/Account/UserPage.js" [label=<UserPage.js> tooltip="UserPage.js" URL="src/components/Account/UserPage.js" ] } } }
+    "src/components/Account/UserPage.js" -> "src/hooks/useAlert.js"
+    "src/components/Account/UserPage.js" -> "src/hooks/useUser.js"
+    "src/components/Account/UserPage.js" -> "src/components/IconButtons/GithubButton.js"
+    "src/components/Account/UserPage.js" -> "src/components/IconButtons/GoogleButton.js"
+    "src/components/Account/UserPage.js" -> "src/components/IconButtons/TwitterButton.js"
+    "src/components/Account/UserPage.js" -> "src/components/Account/PasswordBox.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Generic" {label="Generic" "src/components/Generic/AlertBox.js" [label=<AlertBox.js> tooltip="AlertBox.js" URL="src/components/Generic/AlertBox.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Generic" {label="Generic" "src/components/Generic/ItemImage.js" [label=<ItemImage.js> tooltip="ItemImage.js" URL="src/components/Generic/ItemImage.js" ] } } }
+    "src/components/Generic/ItemImage.js" -> "src/hooks/useIntersectionObserver.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Generic" {label="Generic" "src/components/Generic/ItemLink.js" [label=<ItemLink.js> tooltip="ItemLink.js" URL="src/components/Generic/ItemLink.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Generic" {label="Generic" "src/components/Generic/ItemSelect.js" [label=<ItemSelect.js> tooltip="ItemSelect.js" URL="src/components/Generic/ItemSelect.js" ] } } }
+    "src/components/Generic/ItemSelect.js" -> "src/hooks/useItems.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Generic" {label="Generic" "src/components/Generic/PillSelector.js" [label=<PillSelector.js> tooltip="PillSelector.js" URL="src/components/Generic/PillSelector.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/IconButtons" {label="IconButtons" "src/components/IconButtons/FacebookButton.js" [label=<FacebookButton.js> tooltip="FacebookButton.js" URL="src/components/IconButtons/FacebookButton.js" ] } } }
+    "src/components/IconButtons/FacebookButton.js" -> "src/components/IconButtons/IconButton.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/IconButtons" {label="IconButtons" "src/components/IconButtons/GithubButton.js" [label=<GithubButton.js> tooltip="GithubButton.js" URL="src/components/IconButtons/GithubButton.js" ] } } }
+    "src/components/IconButtons/GithubButton.js" -> "src/components/IconButtons/IconButton.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/IconButtons" {label="IconButtons" "src/components/IconButtons/GoogleButton.js" [label=<GoogleButton.js> tooltip="GoogleButton.js" URL="src/components/IconButtons/GoogleButton.js" ] } } }
+    "src/components/IconButtons/GoogleButton.js" -> "src/components/IconButtons/IconButton.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/IconButtons" {label="IconButtons" "src/components/IconButtons/IconButton.js" [label=<IconButton.js> tooltip="IconButton.js" URL="src/components/IconButtons/IconButton.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/IconButtons" {label="IconButtons" "src/components/IconButtons/TwitterButton.js" [label=<TwitterButton.js> tooltip="TwitterButton.js" URL="src/components/IconButtons/TwitterButton.js" ] } } }
+    "src/components/IconButtons/TwitterButton.js" -> "src/components/IconButtons/IconButton.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemForm" {label="ItemForm" "src/components/ItemForm/ItemCreator.js" [label=<ItemCreator.js> tooltip="ItemCreator.js" URL="src/components/ItemForm/ItemCreator.js" ] } } }
+    "src/components/ItemForm/ItemCreator.js" -> "src/hooks/useItems.js"
+    "src/components/ItemForm/ItemCreator.js" -> "src/components/ItemForm/ItemForm.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemForm" {label="ItemForm" "src/components/ItemForm/ItemEditor.js" [label=<ItemEditor.js> tooltip="ItemEditor.js" URL="src/components/ItemForm/ItemEditor.js" ] } } }
+    "src/components/ItemForm/ItemEditor.js" -> "src/hooks/useItems.js"
+    "src/components/ItemForm/ItemEditor.js" -> "src/components/ItemForm/ItemForm.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemForm" {label="ItemForm" "src/components/ItemForm/ItemForm.js" [label=<ItemForm.js> tooltip="ItemForm.js" URL="src/components/ItemForm/ItemForm.js" ] } } }
+    "src/components/ItemForm/ItemForm.js" -> "src/hooks/useAlert.js"
+    "src/components/ItemForm/ItemForm.js" -> "src/hooks/useItems.js"
+    "src/components/ItemForm/ItemForm.js" -> "src/components/Generic/ItemSelect.js"
+    "src/components/ItemForm/ItemForm.js" -> "src/components/Generic/PillSelector.js"
+    "src/components/ItemForm/ItemForm.js" -> "src/components/ItemLists/ItemList.js"
+    "src/components/ItemForm/ItemForm.js" -> "src/components/ItemForm/PictureForm.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemForm" {label="ItemForm" "src/components/ItemForm/PictureForm.js" [label=<PictureForm.js> tooltip="PictureForm.js" URL="src/components/ItemForm/PictureForm.js" ] } } }
+    "src/components/ItemForm/PictureForm.js" -> "src/components/Generic/ItemImage.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" "src/components/ItemLists/ItemList.js" [label=<ItemList.js> tooltip="ItemList.js" URL="src/components/ItemLists/ItemList.js" ] } } }
+    "src/components/ItemLists/ItemList.js" -> "src/hooks/useItems.js"
+    "src/components/ItemLists/ItemList.js" -> "src/components/Generic/PillSelector.js"
+    "src/components/ItemLists/ItemList.js" -> "src/components/ItemLists/PictureList/PictureItemList.js"
+    "src/components/ItemLists/ItemList.js" -> "src/components/ItemLists/Searchbar.js"
+    "src/components/ItemLists/ItemList.js" -> "src/components/ItemLists/TableList/TableItemList.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" subgraph "cluster_src/components/ItemLists/PictureList" {label="PictureList" "src/components/ItemLists/PictureList/PictureItemList.js" [label=<PictureItemList.js> tooltip="PictureItemList.js" URL="src/components/ItemLists/PictureList/PictureItemList.js" ] } } } }
+    "src/components/ItemLists/PictureList/PictureItemList.js" -> "src/components/ItemLists/PictureList/PictureItemListItem.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" subgraph "cluster_src/components/ItemLists/PictureList" {label="PictureList" "src/components/ItemLists/PictureList/PictureItemListItem.js" [label=<PictureItemListItem.js> tooltip="PictureItemListItem.js" URL="src/components/ItemLists/PictureList/PictureItemListItem.js" ] } } } }
+    "src/components/ItemLists/PictureList/PictureItemListItem.js" -> "src/hooks/useItems.js"
+    "src/components/ItemLists/PictureList/PictureItemListItem.js" -> "src/components/Generic/ItemImage.js"
+    "src/components/ItemLists/PictureList/PictureItemListItem.js" -> "src/components/Generic/ItemLink.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" "src/components/ItemLists/Searchbar.js" [label=<Searchbar.js> tooltip="Searchbar.js" URL="src/components/ItemLists/Searchbar.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" subgraph "cluster_src/components/ItemLists/TableList" {label="TableList" "src/components/ItemLists/TableList/TableItemList.js" [label=<TableItemList.js> tooltip="TableItemList.js" URL="src/components/ItemLists/TableList/TableItemList.js" ] } } } }
+    "src/components/ItemLists/TableList/TableItemList.js" -> "src/hooks/useItems.js"
+    "src/components/ItemLists/TableList/TableItemList.js" -> "src/components/Generic/ItemSelect.js"
+    "src/components/ItemLists/TableList/TableItemList.js" -> "src/components/ItemLists/TableList/TableItemListItem.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/ItemLists" {label="ItemLists" subgraph "cluster_src/components/ItemLists/TableList" {label="TableList" "src/components/ItemLists/TableList/TableItemListItem.js" [label=<TableItemListItem.js> tooltip="TableItemListItem.js" URL="src/components/ItemLists/TableList/TableItemListItem.js" ] } } } }
+    "src/components/ItemLists/TableList/TableItemListItem.js" -> "src/hooks/useItems.js"
+    "src/components/ItemLists/TableList/TableItemListItem.js" -> "src/components/Generic/ItemLink.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Navigation" {label="Navigation" "src/components/Navigation/LoginRedirector.js" [label=<LoginRedirector.js> tooltip="LoginRedirector.js" URL="src/components/Navigation/LoginRedirector.js" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Navigation" {label="Navigation" "src/components/Navigation/Navbar.js" [label=<Navbar.js> tooltip="Navbar.js" URL="src/components/Navigation/Navbar.js" ] } } }
+    "src/components/Navigation/Navbar.js" -> "src/hooks/useUser.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/firebase" {label="firebase" "src/firebase/firebaseAuth.js" [label=<firebaseAuth.js> tooltip="firebaseAuth.js" URL="src/firebase/firebaseAuth.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/firebase" {label="firebase" "src/firebase/firebaseConfig.js" [label=<firebaseConfig.js> tooltip="firebaseConfig.js" URL="src/firebase/firebaseConfig.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/hooks" {label="hooks" "src/hooks/useAlert.js" [label=<useAlert.js> tooltip="useAlert.js" URL="src/hooks/useAlert.js" ] } }
+    "src/hooks/useAlert.js" -> "src/components/Generic/AlertBox.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/hooks" {label="hooks" "src/hooks/useIntersectionObserver.js" [label=<useIntersectionObserver.js> tooltip="useIntersectionObserver.js" URL="src/hooks/useIntersectionObserver.js" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/hooks" {label="hooks" "src/hooks/useItems.js" [label=<useItems.js> tooltip="useItems.js" URL="src/hooks/useItems.js" ] } }
+    "src/hooks/useItems.js" -> "src/hooks/useAlert.js"
+    "src/hooks/useItems.js" -> "src/hooks/useUser.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/hooks" {label="hooks" "src/hooks/useUser.js" [label=<useUser.js> tooltip="useUser.js" URL="src/hooks/useUser.js" ] } }
+    "src/hooks/useUser.js" -> "src/firebase/firebaseAuth.js"
+    "src/hooks/useUser.js" -> "src/hooks/useAlert.js"
+    subgraph "cluster_src" {label="src" "src/index.js" [label=<index.js> tooltip="index.js" URL="src/index.js" ] }
+    "src/index.js" -> "src/App.js"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/styles" {label="styles" "src/styles/styles.css" [label=<styles.css> tooltip="styles.css" URL="src/styles/styles.css" ] } }
+}
