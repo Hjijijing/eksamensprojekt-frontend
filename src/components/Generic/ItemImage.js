@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 const Buffer = require("buffer/").Buffer;
 

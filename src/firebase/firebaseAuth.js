@@ -1,8 +1,8 @@
 import {
-  GoogleAuthProvider,
-  TwitterAuthProvider,
   FacebookAuthProvider,
   GithubAuthProvider,
+  GoogleAuthProvider,
+  TwitterAuthProvider,
 } from "firebase/auth";
 
 const GoogleProvider = new GoogleAuthProvider();

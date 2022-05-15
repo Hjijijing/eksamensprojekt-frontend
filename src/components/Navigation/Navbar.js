@@ -1,8 +1,8 @@
+import { getAuth } from "firebase/auth";
 import React from "react";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUser from "../../hooks/useUser";
-import { FaSignOutAlt } from "react-icons/fa";
-import { getAuth } from "firebase/auth";
 const auth = getAuth();
 
 export default function Navbar() {

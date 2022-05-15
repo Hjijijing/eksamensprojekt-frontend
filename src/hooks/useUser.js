@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
 import axios from "axios";
 import {
-  GoogleProvider,
-  TwitterProvider,
-  FacebookProvider,
-  GithubProvider,
-} from "../firebase/firebaseAuth";
-import {
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
   getAuth,
-  signInWithPopup,
+  linkWithCredential,
   linkWithPopup,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  linkWithCredential,
-  EmailAuthProvider,
+  signInWithPopup,
   updatePassword,
 } from "firebase/auth";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import {
+  FacebookProvider,
+  GithubProvider,
+  GoogleProvider,
+  TwitterProvider,
+} from "../firebase/firebaseAuth";
 import useAlert from "./useAlert";
 const auth = getAuth();
 

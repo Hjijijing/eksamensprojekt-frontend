@@ -1,7 +1,7 @@
 import React from "react";
 import "./firebase/firebaseConfig";
-import ContextProviders from "./ContextProviders";
 import { BrowserRouter as Router } from "react-router-dom";
+import ContextProviders from "./ContextProviders";
 import MainContent from "./MainContent";
 import "./styles/styles.css";
 

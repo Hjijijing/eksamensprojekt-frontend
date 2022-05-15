@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TableItemListItem from "./TableItemListItem";
-import ItemSelect from "../../Generic/ItemSelect";
 import useItems from "../../../hooks/useItems";
+import ItemSelect from "../../Generic/ItemSelect";
+import TableItemListItem from "./TableItemListItem";
 
 function toggleSelection(item) {
   return (arr) => {

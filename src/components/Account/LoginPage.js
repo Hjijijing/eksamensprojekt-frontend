@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import FacebookButton from "../IconButtons/FacebookButton";
+import { useNavigate } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 import GithubButton from "../IconButtons/GithubButton";
 import GoogleButton from "../IconButtons/GoogleButton";
 import TwitterButton from "../IconButtons/TwitterButton";
-import useUser from "../../hooks/useUser";
-import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
